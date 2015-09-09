@@ -5,27 +5,40 @@
 //  Copyright (c) 2015 Gregory D. Stula. All rights reserved.
 //
 
-class GoLCell: NSObject, Equatable {
+class GoLCell: Cell {
 
 
     // MARK: Properties
-    weak var currentGrid:GoLGrid?
-    
-    var coordinates = (row:0, col:0)
-    
-    var numberOfNeighbors = 0
-    var nextAction = Action.Idle
-    
-    var isAlive:Bool = false
+//    override weak var currentGrid:GoLGrid? {
+//        get {
+//            return super.currentGrid
+//        }
+//        set {
+//            super.currentGrid = newValue
+//        }
+//    }
+//
+//    
+//    override var coordinates:(row:Int, col:Int) {
+//        get {
+//            return super.coordinates
+//        }
+//        set {
+//            super.coordinates = newValue
+//        }
+//    }
+//    
+//    
+//    override var isAlive:Bool {
+//        get {
+//            return super.isAlive
+//        }
+//        set {
+//            super.isAlive = newValue
+//        }
+//    }
 
 
-   // MARK: Calculated properties
-    enum Action {
-        case Idle
-        case Spawn
-        case Die
-    }
-    
     var gridRowMax:Int {
         if currentGrid != nil {
             return currentGrid!.rowMax
@@ -42,40 +55,79 @@ class GoLCell: NSObject, Equatable {
         }
     }
 
-
-    convenience init(grid:GoLGrid?) {
+    // Mark: Inits
+    
+    override init() {
+        super.init()
+    }
+    
+    
+    required convenience init(grid:GoLGrid?) {
         self.init()
         currentGrid = grid
     }
-
-    // Method for looking up alive status of Neighbors
-    private func cellAliveAt(rowOffset:Int, _ colOffset:Int) -> Bool {
-        return currentGrid != nil ? currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset].isAlive : false
-    }
     
-     
-    // Function to count the amount of live neighbors
-    private func countNeighbors() {
+
+    // MARK: Neighbor Counting
+    // Method for counting the number of live neighbors
+    func countNeighbors() {
         numberOfNeighbors = 0
         
-        if coordinates.row < 2 || coordinates.row > gridRowMax - 2 {
-            return;
-        } else if coordinates.col < 2 || coordinates.col > gridColMax - 2 {
-            return;
-        } else {
-            for rowSearch in (-1...1){
-                for colSearch in (-1...1){
-                    if (rowSearch != 0 || colSearch != 0) &&
-                        (cellAliveAt(rowSearch, colSearch)) {
-                            numberOfNeighbors++
-                        }
+        // Prevents index out of bounds for special case of row/col = 0.
+        if coordinates.row < 1 || coordinates.col < 1 {
+            return
+            
+        // Prevents index out of bounds for special case of *MAX - 1
+        } else if coordinates.row > gridRowMax - 2 || coordinates.col > gridColMax - 2 {
+            return
+        }
+        
+        // Normal case
+        for rowOffset in (-1...1){
+            for colOffset in (-1...1){
+                if (rowOffset != 0 || colOffset != 0) &&
+                    (neighborAliveAt(rowOffset, colOffset)) {
+                        numberOfNeighbors++
                 }
             }
         }
     }
-
+    
+    
+    // Method for looking up alive status of Neighbors
+    func neighborAliveAt(rowOffset:Int, _ colOffset:Int) -> Bool {
+        return currentGrid != nil ? currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset].isAlive : false
+    }
+    
+    
+    // Helper functions for staying inbounds when a cell 
+    // on the edge of the grid is counting neighbors.
+//    internal func specialCaseZero() {
+//        for rowOffset in (0...1) {
+//            for colOffset in (0...1) {
+//                if (rowOffset != 0 || colOffset != 0) &&
+//                    (neighborAliveAt(rowOffset, colOffset)) {
+//                        numberOfNeighbors++
+//                }
+//            }
+//        }
+//    }
+//    
+//    internal func specialCaseMax() {
+//        for rowOffset in (-1...0) {
+//            for colOffset in (-1...0) {
+//                if (rowOffset != 0 || colOffset != 0) &&
+//                    (neighborAliveAt(rowOffset, colOffset)) {
+//                        numberOfNeighbors++
+//                }
+//            }
+//        }
+//    }
+    
+    
+    // MARK: Cell Action Methods
     // The cell computes it's next action
-     func calculateNextAction() {
+     override func calculateNextAction() {
         self.countNeighbors()
         
         if isAlive {
@@ -99,7 +151,7 @@ class GoLCell: NSObject, Equatable {
     }
     
     
-    func executeNextAction() {
+    override func executeNextAction() {
         switch nextAction {
             case .Idle:
                 break
@@ -111,8 +163,3 @@ class GoLCell: NSObject, Equatable {
     }
 }
 
-
-// Overloading the == operator as per the Equatable protocol
-func ==(lhs: GoLCell, rhs: GoLCell) -> Bool {
-    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-}

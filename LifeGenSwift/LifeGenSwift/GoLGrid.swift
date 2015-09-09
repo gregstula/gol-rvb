@@ -12,27 +12,38 @@ import UIKit
 class GoLGrid {
     
     // MARK: Properties
-    let cellGrid:LiteMatrix<GoLCell>
     let rowMax:Int
     let colMax:Int
     
+    var useColoredCells:Bool = false
     var generationCount = 0
     private var cellsKnowTheirPosition:Bool = false
     
+    let cellGrid:LiteMatrix<Cell>
     
     // Mark: Init
-    init (rowSize:Int, columnSize colSize:Int) {
+    init (useColor answer:Bool, rowSize:Int, columnSize colSize:Int) {
         rowMax = rowSize
         colMax = colSize
-        cellGrid = LiteMatrix<GoLCell>(rows: rowSize, columns: colSize)
+        cellGrid = LiteMatrix<Cell>(rows: rowSize, columns: colSize)
+        useColoredCells = answer
         
-        for var i = 0; i < rowMax; i++ {
-            for var j = 0; j < colMax; j++ {
-                cellGrid[i,j] = GoLCell(grid: self)
+        if useColoredCells {
+            for var i = 0; i < rowMax; i++ {
+                for var j = 0; j < colMax; j++ {
+                    cellGrid[i,j] = GoLColorCell(grid: self)
+                }
+            }
+        } else {
+            for var i = 0; i < rowMax; i++ {
+                for var j = 0; j < colMax; j++ {
+                    cellGrid[i,j] = GoLCell(grid: self)
+                }
             }
         }
     }
 
+    
     // Mark: Generation handling
     private func prepNextGeneration() {
         // Cells should know where they are mapped on the matrix
@@ -49,6 +60,7 @@ class GoLGrid {
             cell.calculateNextAction()
         }
    }
+   
     
     private func executeNextGeneration() {
         for cell in cellGrid {

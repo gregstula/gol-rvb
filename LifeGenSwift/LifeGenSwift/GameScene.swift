@@ -11,10 +11,10 @@ import SpriteKit
 class GameScene: SKScene {
 
     // MARK: Properties
-    let pixelSize:CGFloat = 20.0
+    let cellSize:CGFloat = 20.0
     let timeBetweenGenerations:Double = 0.5
     
-    let grid = GoLGrid(rowSize: 40, columnSize: 40)
+    let grid = GoLGrid(useColor:true, rowSize: 40, columnSize: 40)
     let colorButton = SKLabelNode(fontNamed: "Monaco")
     
     var previousTimeRecorded:CFTimeInterval?
@@ -23,10 +23,11 @@ class GameScene: SKScene {
     
     
     override func didMoveToView(view: SKView) {
-            colorButton.position = CGPoint(x:CGRectGetMinX(self.frame), y:CGRectGetMinY(self.frame));
+            colorButton.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
             colorButton.fontColor = UIColor.blueColor()
             colorButton.text = "Change color"
     }
+
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
@@ -69,7 +70,7 @@ class GameScene: SKScene {
 
     override func update(currentTime: CFTimeInterval) {
       /* Called before each frame is rendered */
-    if (previousTimeRecorded != nil){
+    if (previousTimeRecorded != nil && !paused) {
        timeSinceLastGeneration += (currentTime - previousTimeRecorded!)
     }
         self.previousTimeRecorded = currentTime;
@@ -83,8 +84,9 @@ class GameScene: SKScene {
             println("\(grid.generationCount)")
         }
     }
+    
 
-// MARK: Drawing GoL objects to scene
+    // MARK: Drawing GoL objects to scene
     func drawGrid() {
         for cell in grid.cellGrid {
             if cell.isAlive {
@@ -97,22 +99,33 @@ class GameScene: SKScene {
 
     private func renderCell(coordinates:(Int, Int)) -> SKSpriteNode{
         let sprite = SKSpriteNode()
-        sprite.color = UIColor.blackColor()
-        sprite.size = CGSizeMake(pixelSize, pixelSize)
+        sprite.color = determineCellColor(coordinates)
+        sprite.size = CGSizeMake(cellSize, cellSize)
         sprite.position = convertCoordinatesToPixels(coordinates)
         self.addChild(sprite)
         return sprite
     }
     
     
-// MARK: Conversions
+    private func determineCellColor(coords:(row: Int, col: Int)) -> UIColor {
+        if let cell:GoLColorCell = grid.cellGrid[coords.row, coords.col] as? GoLColorCell {
+            return cell.spawnColor
+        } else if let cell = grid.cellGrid[coords.row, coords.col] as? GoLCell {
+            return UIColor.blackColor()
+        } else {
+            return UIColor.purpleColor()
+        }
+    }
+    
+    
+    // MARK: Conversions
     func convertCoordinatesToPixels(coords:(row: Int, col: Int)) -> CGPoint{
-        return CGPointMake(CGFloat(coords.row) * pixelSize, CGFloat(coords.col) * pixelSize)
+        return CGPointMake(CGFloat(coords.row) * cellSize, CGFloat(coords.col) * cellSize)
     }
     
     
     func convertPixelsToCoordinates(pixel: CGPoint) -> (row: Int, col: Int) {
-        var row = Int(floor(pixel.x / pixelSize)), col = Int(floor(pixel.y / pixelSize))
+        var row = Int(floor(pixel.x / cellSize)), col = Int(floor(pixel.y / cellSize))
         return (row, col)
     }
    

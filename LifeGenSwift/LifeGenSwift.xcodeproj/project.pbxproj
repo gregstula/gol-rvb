@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A8DBB191B9FD36F00AF9362 /* GoLColorGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DBB181B9FD36F00AF9362 /* GoLColorGrid.swift */; };
 		2A8DBB1B1B9FD45A00AF9362 /* GoLColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DBB1A1B9FD45A00AF9362 /* GoLColorCell.swift */; };
 		2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88F961B9F942700D9A169 /* AppDelegate.swift */; };
 		2AB88F991B9F942700D9A169 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88F981B9F942700D9A169 /* GameScene.sks */; };
@@ -21,6 +20,7 @@
 		2AB88FC51B9F967C00D9A169 /* GoLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */; };
 		2AB88FC61B9F967C00D9A169 /* LiteMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FC01B9F967C00D9A169 /* LiteMatrix.swift */; };
 		2AB88FC71B9F967C00D9A169 /* ObjcLiteMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FC31B9F967C00D9A169 /* ObjcLiteMatrix.m */; };
+		2AD368521BA0B01600747A31 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD368511BA0B01600747A31 /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A8DBB181B9FD36F00AF9362 /* GoLColorGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoLColorGrid.swift; path = LifeGenSwift/GoLColorGrid.swift; sourceTree = SOURCE_ROOT; };
 		2A8DBB1A1B9FD45A00AF9362 /* GoLColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoLColorCell.swift; path = LifeGenSwift/GoLColorCell.swift; sourceTree = SOURCE_ROOT; };
 		2AB88F911B9F942700D9A169 /* LifeGenSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeGenSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB88F951B9F942700D9A169 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		2AB88FC01B9F967C00D9A169 /* LiteMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiteMatrix.swift; sourceTree = "<group>"; };
 		2AB88FC21B9F967C00D9A169 /* ObjcLiteMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcLiteMatrix.h; sourceTree = "<group>"; };
 		2AB88FC31B9F967C00D9A169 /* ObjcLiteMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcLiteMatrix.m; sourceTree = "<group>"; };
+		2AD368511BA0B01600747A31 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cell.swift; path = LifeGenSwift/Cell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,10 +142,10 @@
 		2AB88FC81B9F971000D9A169 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */,
+				2AD368511BA0B01600747A31 /* Cell.swift */,
 				2AB88FBA1B9F965F00D9A169 /* GoLCell.swift */,
-				2A8DBB181B9FD36F00AF9362 /* GoLColorGrid.swift */,
 				2A8DBB1A1B9FD45A00AF9362 /* GoLColorCell.swift */,
+				2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */,
 			);
 			name = Models;
 			path = ../LifeGenSwift.xcodeproj;
@@ -257,7 +257,7 @@
 				2AB88FC51B9F967C00D9A169 /* GoLGrid.swift in Sources */,
 				2AB88FC61B9F967C00D9A169 /* LiteMatrix.swift in Sources */,
 				2A8DBB1B1B9FD45A00AF9362 /* GoLColorCell.swift in Sources */,
-				2A8DBB191B9FD36F00AF9362 /* GoLColorGrid.swift in Sources */,
+				2AD368521BA0B01600747A31 /* Cell.swift in Sources */,
 				2AB88FC71B9F967C00D9A169 /* ObjcLiteMatrix.m in Sources */,
 				2AB88FBB1B9F965F00D9A169 /* GoLCell.swift in Sources */,
 				2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */,

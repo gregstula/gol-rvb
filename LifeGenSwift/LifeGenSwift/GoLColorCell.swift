@@ -10,36 +10,74 @@ import UIKit
 
 class GoLColorCell: GoLCell {
 
-    // MARK: Properties
-    weak var currentColorGrid:GoLColorGrid?
+    // MARK: Color Properties
+    private var redNeighbors = 0
+    private var blueNeighbors = 0
+    
+    enum CellColor {
+        case blue
+        case red
+    }
 
-    var currentColor:UIColor = UIColor.blueColor()
-    var spawnColor:UIColor = UIColor.blueColor()
+    var currentColor = CellColor.blue
     
-    var colorOfNeighbors = (red: Int blue: Int)
+    var spawnColor:UIColor {
+        return self.currentColor == CellColor.blue ? UIColor.blueColor() : UIColor.redColor()
+    }
     
+    
+    override init() {
+        super.init()
+    }
+    
+    
+    required convenience init(grid:GoLGrid?) {
+        self.init()
+        currentGrid = grid
+    }
+
+    // MARK: Color Counting
     // Function to count the amount of live neighbors
-    private func countNeighbors() {
-        numberOfNeighbors = 0
-        
-        if coordinates.row < 2 || coordinates.row > gridRowMax - 2 {
-            return;
-        } else if coordinates.col < 2 || coordinates.col > gridColMax - 2 {
-            return;
-        } else {
-            for rowSearch in (-1...1){
-                for colSearch in (-1...1){
-                    if (rowSearch != 0 || colSearch != 0) &&
-                        (cellAliveAt(rowSearch, colSearch)) {
-                            numberOfNeighbors++
-                    }
+    override func countNeighbors() {
+        // Prevents index out of bounds for special case of row/col = 0.
+        if coordinates.row < 1 || coordinates.col < 1 {
+            return
+            
+        // Prevents index out of bounds for special case of *MAX - 1
+        } else if coordinates.row > gridRowMax - 2 || coordinates.col > gridColMax - 2 {
+            return
+        }
+
+        // Normal case
+        for rowOffset in (-1...1){
+            for colOffset in (-1...1){
+                if (rowOffset != 0 || colOffset != 0) &&
+                    (neighborAliveAt(rowOffset, colOffset)) {
+                    self.countNeighborByColor(rowOffset, colOffset)
+                    numberOfNeighbors++
                 }
             }
         }
     }
     
-    // The cell computes it's next action
-    func calculateNextAction() {
+   
+    internal func countNeighborByColor(rowOffset:Int, _ colOffset:Int) {
+        if currentGrid != nil {
+            var cell = currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset] as? GoLColorCell
+            
+            if cell != nil {
+                if cell!.currentColor == CellColor.blue {
+                    blueNeighbors++
+                } else if cell!.currentColor == CellColor.red {
+                    redNeighbors++
+                }
+            }
+        }
+    }
+    
+    
+    // MARK: calculateNextAction w.r.t Color
+    override func calculateNextAction() {
         self.countNeighbors()
         
         if isAlive {
@@ -53,24 +91,16 @@ class GoLColorCell: GoLCell {
             }
         } else {
             switch numberOfNeighbors {
-                //case 2: fallthrough
             case 3:
+                if redNeighbors > blueNeighbors {
+                    currentColor = CellColor.red
+                } else {
+                    currentColor = CellColor.blue
+                }
                 nextAction = Action.Spawn
             default:
                 nextAction = Action.Idle
             }
-        }
-    }
-    
-    
-    func executeNextAction() {
-        switch nextAction {
-        case .Idle:
-            break
-        case .Spawn:
-            isAlive = true
-        case .Die:
-            isAlive = false
         }
     }
 }

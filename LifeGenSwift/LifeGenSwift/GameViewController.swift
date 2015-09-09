@@ -25,8 +25,12 @@ extension SKNode {
     }
 }
 
+
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var colorSwitch: UISwitch!
+    @IBOutlet weak var PauseButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
