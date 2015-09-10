@@ -12,10 +12,10 @@ class GameScene: SKScene {
 
     // MARK: Properties
     let cellSize:CGFloat = 20.0
+    // let buttonSize = (height:CGFloat(50.0), width:CGFloat(30))
     let timeBetweenGenerations:Double = 0.5
     
     let grid = GoLGrid(useColor:true, rowSize: 40, columnSize: 40)
-    let colorButton = SKLabelNode(fontNamed: "Monaco")
     
     var previousTimeRecorded:CFTimeInterval?
     // Also indicates intial startup time
@@ -23,22 +23,14 @@ class GameScene: SKScene {
     
     
     override func didMoveToView(view: SKView) {
-            colorButton.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-            colorButton.fontColor = UIColor.blueColor()
-            colorButton.text = "Change color"
     }
-
+    
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
         for touch in (touches as! Set<UITouch>) {
             let location = touch.locationInNode(self)
-            
-            if location == colorButton.position {
-                
-                colorButton.fontColor = UIColor.redColor()
-            }
             
             let coords = convertPixelsToCoordinates(location)
             
@@ -80,6 +72,7 @@ class GameScene: SKScene {
             grid.prepareAndExecuteNextGeneration()
             //grid.printGridToConsole()
             self.removeAllChildren()
+            //self.renderPauseButton()
             self.drawGrid()
             println("\(grid.generationCount)")
         }
@@ -97,7 +90,7 @@ class GameScene: SKScene {
     }
 
 
-    private func renderCell(coordinates:(Int, Int)) -> SKSpriteNode{
+    private func renderCell(coordinates:(Int, Int)) -> SKSpriteNode {
         let sprite = SKSpriteNode()
         sprite.color = determineCellColor(coordinates)
         sprite.size = CGSizeMake(cellSize, cellSize)
@@ -106,6 +99,16 @@ class GameScene: SKScene {
         return sprite
     }
     
+    
+//    private func renderPauseButton() -> SKSpriteNode {
+//            let sprite = SKSpriteNode()
+//            sprite.color = UIColor.whiteColor()
+//            sprite.size = CGSizeMake(buttonSize.width, buttonSize.height)
+//            sprite.position = (CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)))
+//            self.addChild(sprite)
+//            return sprite
+//    }
+//    
     
     private func determineCellColor(coords:(row: Int, col: Int)) -> UIColor {
         if let cell:GoLColorCell = grid.cellGrid[coords.row, coords.col] as? GoLColorCell {

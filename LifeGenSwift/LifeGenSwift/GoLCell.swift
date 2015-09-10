@@ -7,38 +7,6 @@
 
 class GoLCell: Cell {
 
-
-    // MARK: Properties
-//    override weak var currentGrid:GoLGrid? {
-//        get {
-//            return super.currentGrid
-//        }
-//        set {
-//            super.currentGrid = newValue
-//        }
-//    }
-//
-//    
-//    override var coordinates:(row:Int, col:Int) {
-//        get {
-//            return super.coordinates
-//        }
-//        set {
-//            super.coordinates = newValue
-//        }
-//    }
-//    
-//    
-//    override var isAlive:Bool {
-//        get {
-//            return super.isAlive
-//        }
-//        set {
-//            super.isAlive = newValue
-//        }
-//    }
-
-
     var gridRowMax:Int {
         if currentGrid != nil {
             return currentGrid!.rowMax
@@ -54,9 +22,9 @@ class GoLCell: Cell {
             return 0
         }
     }
+    
 
     // Mark: Inits
-    
     override init() {
         super.init()
     }
@@ -100,31 +68,6 @@ class GoLCell: Cell {
     }
     
     
-    // Helper functions for staying inbounds when a cell 
-    // on the edge of the grid is counting neighbors.
-//    internal func specialCaseZero() {
-//        for rowOffset in (0...1) {
-//            for colOffset in (0...1) {
-//                if (rowOffset != 0 || colOffset != 0) &&
-//                    (neighborAliveAt(rowOffset, colOffset)) {
-//                        numberOfNeighbors++
-//                }
-//            }
-//        }
-//    }
-//    
-//    internal func specialCaseMax() {
-//        for rowOffset in (-1...0) {
-//            for colOffset in (-1...0) {
-//                if (rowOffset != 0 || colOffset != 0) &&
-//                    (neighborAliveAt(rowOffset, colOffset)) {
-//                        numberOfNeighbors++
-//                }
-//            }
-//        }
-//    }
-    
-    
     // MARK: Cell Action Methods
     // The cell computes it's next action
      override func calculateNextAction() {
@@ -141,7 +84,6 @@ class GoLCell: Cell {
             }
         } else {
             switch numberOfNeighbors {
-                //case 2: fallthrough
                 case 3:
                     nextAction = Action.Spawn
                 default:

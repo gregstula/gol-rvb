@@ -118,7 +118,7 @@ extension LiteMatrix : CollectionType {
         var colIndex = 0
         
         // Passes function definition for next() on init with a closure
-        return GeneratorOf<T> {
+        return GeneratorOf<T> { [unowned self] in
             if rowIndex < rowMax {
                 if colIndex < colMax {
                     return self.getObjectFromMatrixAtRow(rowIndex, column: colIndex++)
