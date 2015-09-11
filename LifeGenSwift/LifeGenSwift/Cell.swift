@@ -29,8 +29,7 @@ class Cell: NSObject, Equatable {
         currentGrid = grid
     }
     
-    func calculateNextAction() {}
-    func executeNextAction() {}
+    func countNeighbors() {}
 }
 
 

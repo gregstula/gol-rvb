@@ -120,7 +120,8 @@
 				2AB88F951B9F942700D9A169 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
+			path = "../../../../../../../../../Users/greg-d-stula/cs/Xcode/Projects/LifeGenSwift/LifeGenSwift/LifeGenSwift";
+			sourceTree = SDKROOT;
 		};
 		2AB88FAD1B9F942700D9A169 /* LifeGenSwiftTests */ = {
 			isa = PBXGroup;

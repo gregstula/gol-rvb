@@ -57,14 +57,14 @@ class GoLGrid {
         }
         
         for cell in cellGrid {
-            cell.calculateNextAction()
+            calculateNextAction(cell)
         }
    }
    
     
     private func executeNextGeneration() {
         for cell in cellGrid {
-            cell.executeNextAction()
+            executeNextAction(cell)
         }
     }
     
@@ -74,6 +74,49 @@ class GoLGrid {
         self.executeNextGeneration()
         generationCount++
     }
+    
+    
+    func calculateNextAction(cell:Cell) {
+        cell.countNeighbors()
+        
+        if cell.isAlive {
+            switch cell.numberOfNeighbors {
+            case 0..<2:
+                cell.nextAction = Cell.Action.Die
+            case 2...3:
+                cell.nextAction = Cell.Action.Idle
+            default:
+                cell.nextAction = Cell.Action.Die
+            }
+        } else {
+            switch cell.numberOfNeighbors {
+            case 3:
+                if let colorCell = cell as? GoLColorCell {
+                    if colorCell.redNeighbors > colorCell.blueNeighbors {
+                        colorCell.currentColor = GoLColorCell.CellColor.red
+                    } else {
+                        colorCell.currentColor = GoLColorCell.CellColor.blue
+                    }
+                }
+                cell.nextAction = Cell.Action.Spawn
+            default:
+                cell.nextAction = Cell.Action.Idle
+            }
+        }
+    }
+    
+    
+    func executeNextAction(cell:Cell) {
+        switch cell.nextAction {
+        case Cell.Action.Idle:
+            break
+        case Cell.Action.Spawn:
+            cell.isAlive = true
+        case Cell.Action.Die:
+            cell.isAlive = false
+        }
+    }
+    
 }
 
 

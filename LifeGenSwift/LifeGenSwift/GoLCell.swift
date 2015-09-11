@@ -38,7 +38,7 @@ class GoLCell: Cell {
 
     // MARK: Neighbor Counting
     // Method for counting the number of live neighbors
-    func countNeighbors() {
+    override func countNeighbors() {
         numberOfNeighbors = 0
         
         // Prevents index out of bounds for special case of row/col = 0.
@@ -66,42 +66,4 @@ class GoLCell: Cell {
     func neighborAliveAt(rowOffset:Int, _ colOffset:Int) -> Bool {
         return currentGrid != nil ? currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset].isAlive : false
     }
-    
-    
-    // MARK: Cell Action Methods
-    // The cell computes it's next action
-     override func calculateNextAction() {
-        self.countNeighbors()
-        
-        if isAlive {
-            switch numberOfNeighbors {
-                case 0..<2:
-                    nextAction = Action.Die
-                case 2...3:
-                    nextAction = Action.Idle
-                default:
-                    nextAction = Action.Die
-            }
-        } else {
-            switch numberOfNeighbors {
-                case 3:
-                    nextAction = Action.Spawn
-                default:
-                    nextAction = Action.Idle
-            }
-        }
-    }
-    
-    
-    override func executeNextAction() {
-        switch nextAction {
-            case .Idle:
-                break
-            case .Spawn:
-                isAlive = true
-            case .Die:
-                isAlive = false
-        }
-    }
 }
-

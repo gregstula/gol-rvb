@@ -26,9 +26,8 @@ class GameScene: SKScene {
     }
     
     
+    /* Called when a touch begins */
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
         for touch in (touches as! Set<UITouch>) {
             let location = touch.locationInNode(self)
             
@@ -38,14 +37,11 @@ class GameScene: SKScene {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
                 self.renderCell(coords)
             }
-            
         }
     }
     
-    
+    /* Called when a touch is dragged */
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
         for touch in (touches as! Set<UITouch>) {
             let location = touch.locationInNode(self)
             
@@ -60,24 +56,31 @@ class GameScene: SKScene {
     }
 
 
+    /* Called before each frame is rendered */
     override func update(currentTime: CFTimeInterval) {
-      /* Called before each frame is rendered */
-    if (previousTimeRecorded != nil && !paused) {
-       timeSinceLastGeneration += (currentTime - previousTimeRecorded!)
-    }
+        let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
+        
+        if (previousTimeRecorded != nil && !paused) {
+           timeSinceLastGeneration += (currentTime - previousTimeRecorded!)
+        }
+        
         self.previousTimeRecorded = currentTime;
         
         if (timeSinceLastGeneration > timeBetweenGenerations) {
             timeSinceLastGeneration = 0
-            grid.prepareAndExecuteNextGeneration()
-            //grid.printGridToConsole()
-            self.removeAllChildren()
-            //self.renderPauseButton()
-            self.drawGrid()
-            println("\(grid.generationCount)")
+            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                // grid.printGridToConsole()
+                // println("\(self.grid.generationCount)")
+                self.grid.prepareAndExecuteNextGeneration()
+                dispatch_async(dispatch_get_main_queue()) {
+                    //grid.printGridToConsole()
+                    self.removeAllChildren()
+                    self.drawGrid()
+                }
+            }
         }
     }
-    
+
 
     // MARK: Drawing GoL objects to scene
     func drawGrid() {
@@ -99,16 +102,6 @@ class GameScene: SKScene {
         return sprite
     }
     
-    
-//    private func renderPauseButton() -> SKSpriteNode {
-//            let sprite = SKSpriteNode()
-//            sprite.color = UIColor.whiteColor()
-//            sprite.size = CGSizeMake(buttonSize.width, buttonSize.height)
-//            sprite.position = (CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)))
-//            self.addChild(sprite)
-//            return sprite
-//    }
-//    
     
     private func determineCellColor(coords:(row: Int, col: Int)) -> UIColor {
         if let cell:GoLColorCell = grid.cellGrid[coords.row, coords.col] as? GoLColorCell {

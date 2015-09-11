@@ -11,8 +11,8 @@ import UIKit
 class GoLColorCell: GoLCell {
 
     // MARK: Color Properties
-    private var redNeighbors = 0
-    private var blueNeighbors = 0
+    var redNeighbors = 0
+    var blueNeighbors = 0
     
     enum CellColor {
         case blue
@@ -39,6 +39,7 @@ class GoLColorCell: GoLCell {
     // MARK: Color Counting
     // Function to count the amount of live neighbors
     override func countNeighbors() {
+        numberOfNeighbors = 0
         // Prevents index out of bounds for special case of row/col = 0.
         if coordinates.row < 1 || coordinates.col < 1 {
             return
@@ -71,35 +72,6 @@ class GoLColorCell: GoLCell {
                 } else if cell!.currentColor == CellColor.red {
                     redNeighbors++
                 }
-            }
-        }
-    }
-    
-    
-    // MARK: calculateNextAction w.r.t Color
-    override func calculateNextAction() {
-        self.countNeighbors()
-        
-        if isAlive {
-            switch numberOfNeighbors {
-            case 0..<2:
-                nextAction = Action.Die
-            case 2...3:
-                nextAction = Action.Idle
-            default:
-                nextAction = Action.Die
-            }
-        } else {
-            switch numberOfNeighbors {
-            case 3:
-                if redNeighbors > blueNeighbors {
-                    currentColor = CellColor.red
-                } else {
-                    currentColor = CellColor.blue
-                }
-                nextAction = Action.Spawn
-            default:
-                nextAction = Action.Idle
             }
         }
     }
