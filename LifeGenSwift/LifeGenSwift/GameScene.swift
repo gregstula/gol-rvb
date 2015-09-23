@@ -49,7 +49,7 @@ class GameScene: SKScene {
             
             if !grid.cellGrid[coords.row, coords.col].isAlive {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
-                self.renderCell(coords)
+                self.renderGoLCell(coords)
             }
         }
     }
@@ -64,7 +64,7 @@ class GameScene: SKScene {
             
             if !grid.cellGrid[coords.row, coords.col].isAlive {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
-                renderCell(coords)
+                renderGoLCell(coords)
             }
             
         }
@@ -104,15 +104,15 @@ class GameScene: SKScene {
         for cell in grid.cellGrid {
             let coords = cell.coordinates
             if cell.isAlive {
-                renderCell(coords)
+                renderGoLCell(coords)
             }
         }
     }
     
 
-    private func renderCell(coordinates:(Int, Int)) -> SKSpriteNode {
+    private func renderGoLCell(coordinates:(Int, Int)) -> SKSpriteNode {
         let sprite = SKSpriteNode()
-        sprite.color = determineCellColor(coordinates)
+        sprite.color = determineGoLCellColor(coordinates)
         sprite.size = CGSizeMake(cellSpriteSize, cellSpriteSize)
         sprite.position = convertCoordinatesToPixels(coordinates)
         self.addChild(sprite)
@@ -120,10 +120,10 @@ class GameScene: SKScene {
     }
     
     
-    private func determineCellColor(coords:(row: Int, col: Int)) -> UIColor {
-        if let cell:GoLColorCell = grid.cellGrid[coords.row, coords.col] as? GoLColorCell {
+    private func determineGoLCellColor(coords:(row: Int, col: Int)) -> UIColor {
+        if let cell:GoLColorGoLCell = grid.cellGrid[coords.row, coords.col] as? GoLColorGoLCell {
             return cell.spawnColor
-        } else if let _ = grid.cellGrid[coords.row, coords.col] as? GoLCell {
+        } else if let _ = grid.cellGrid[coords.row, coords.col] as? GoLGoLCell {
             return UIColor.blackColor()
         } else {
             return UIColor.purpleColor()

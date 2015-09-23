@@ -1,69 +1,44 @@
-//  GoLCell.swift
+//  GoLGoLCell.swift
 //  LifeGenSwift
 //
 //  Created by Gregory D. Stula on 8/30/15.
 //  Copyright (c) 2015 Gregory D. Stula. All rights reserved.
 //
 
-class GoLCell: Cell {
+import UIKit
 
-    var gridRowMax:Int {
-        if currentGrid != nil {
-            return currentGrid!.rowMax
-        } else {
-            return 0
-        }
-    }
-    
-    var gridColMax:Int {
-        if currentGrid != nil {
-            return currentGrid!.colMax
-        } else {
-            return 0
-        }
-    }
-    
+final class GoLGoLCell: NSObject {
 
-    // Mark: Inits
-    override init() {
-        super.init()
-    }
+    var isAlive:Bool = false
+    var coordinates = (row:0, col:0)
+    var numberOfNeighbors = 0
     
-    
-    required convenience init(grid:GoLGrid?) {
-        self.init()
-        currentGrid = grid
-    }
-    
+    var nextAction = Action.Idle
 
-    // MARK: Neighbor Counting
-    // Method for counting the number of live neighbors
-    override func countNeighbors() {
-        numberOfNeighbors = 0
-        
-        // Prevents index out of bounds for special case of row/col = 0.
-        if coordinates.row < 1 || coordinates.col < 1 {
-            return
-            
-        // Prevents index out of bounds for special case of *MAX - 1
-        } else if coordinates.row > gridRowMax - 2 || coordinates.col > gridColMax - 2 {
-            return
-        }
-        
-        // Normal case
-        for rowOffset in (-1...1){
-            for colOffset in (-1...1){
-                if (rowOffset != 0 || colOffset != 0) &&
-                    (neighborAliveAt(rowOffset, colOffset)) {
-                        numberOfNeighbors++
-                }
-            }
-        }
+
+    enum Action {
+        case Idle
+        case Spawn
+        case Die
     }
     
-    
-    // Method for looking up alive status of Neighbors
-    func neighborAliveAt(rowOffset:Int, _ colOffset:Int) -> Bool {
-        return currentGrid != nil ? currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset].isAlive : false
+    // MARK: Color Properties
+    var redNeighbors = 0
+    var blueNeighbors = 0
+
+    enum GoLCellColor {
+        case blue
+        case red
     }
+
+    var currentColor = GoLCellColor.blue
+
+    var spawnColor:UIColor {
+        return self.currentColor == GoLCellColor.blue ? UIColor.blueColor() : UIColor.redColor()
+    }
+}
+
+// Overloading the == operator as per the Equatable protocol
+func ==(lhs: GoLGoLCell, rhs: GoLGoLCell) -> Bool {
+    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }
