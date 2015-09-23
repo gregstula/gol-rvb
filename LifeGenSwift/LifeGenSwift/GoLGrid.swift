@@ -28,42 +28,31 @@ final class GoLGrid {
         cellGrid = LiteMatrix<GoLCell>(rows: rowSize, columns: colSize)
         useColoredGoLCells = answer
         
-        if useColoredGoLCells {
             for var i = 0; i < rowMax; i++ {
                 for var j = 0; j < colMax; j++ {
-                    cellGrid[i,j] = GoLColorGoLCell(grid: self)
+                    cellGrid[i,j] = GoLCell()
                 }
             }
-        } else {
-            for var i = 0; i < rowMax; i++ {
-                for var j = 0; j < colMax; j++ {
-                    cellGrid[i,j] = GoLGoLCell(grid: self)
-                }
-            }
-        }
     }
     
-    
+    // MARK: Neighbor counting
     private func countNeighbors(cell:GoLCell) {
         cell.numberOfNeighbors = 0
         
         // Prevents index out of bounds for special case of row/col = 0.
         if cell.coordinates.row < 1 || cell.coordinates.col < 1 {
             return
-            
-            // Prevents index out of bounds for special case of *MAX - 1
+        // Prevents index out of bounds for special case of *MAX - 1
         } else if cell.coordinates.row > rowMax - 2 || cell.coordinates.col > colMax - 2 {
             return
         }
         
         // Normal case
-        for rowOffset in (-1...1){
-            for colOffset in (-1...1){
+        for rowOffset in (-1...1) {
+            for colOffset in (-1...1) {
                 if (rowOffset != 0 || colOffset != 0) &&
-                    (neighborAliveAt(rowOffset, colOffset)) {
-                        if let colorGoLCell = cell as? GoLColorGoLCell {
-                            countNeighborByColor(colorGoLCell, rowOffset, colOffset);
-                        }
+                    (neighborAliveAt(cell, rowOffset, colOffset)) {
+                        countNeighborByColor(cell, rowOffset, colOffset);
                         cell.numberOfNeighbors++
                 }
             }
@@ -72,21 +61,19 @@ final class GoLGrid {
     
     
     // Helper Method for looking up alive status of Neighbors
-    func neighborAliveAt(rowOffset:Int, _ colOffset:Int) -> Bool {
-        return currentGrid != nil ? currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset].isAlive : false
+    func neighborAliveAt(cell:GoLCell, _ rowOffset:Int, _ colOffset:Int) -> Bool {
+        return cellGrid[cell.coordinates.row + rowOffset, cell.coordinates.col + colOffset].isAlive
     }
     
     
     // Helper method for counting color cells
-    private func countNeighborByColor(cell:GoLColorGoLCell, _ rowOffset:Int, _ colOffset:Int) {
-        let neighbor = cellGrid[cell.coordinates.row + rowOffset, cell.coordinates.col + colOffset] as! GoLColorGoLCell
-        
-        if neighbor != nil {
-            if neighbor!.currentColor == GoLCellColor.blue {
-                cell.blueNeighbors++
-            } else if cell!.currentColor == GoLCellColor.red {
-                redNeighbors++
-            }
+    private func countNeighborByColor(cell:GoLCell, _ rowOffset:Int, _ colOffset:Int) {
+    let neighbor = cellGrid[cell.coordinates.row + rowOffset, cell.coordinates.col + colOffset]
+    
+        if neighbor.currentColor == GoLCell.CellColor.blue {
+            cell.blueNeighbors++
+        } else if cell.currentColor == GoLCell.CellColor.red {
+            cell.redNeighbors++
         }
     }
 
@@ -108,7 +95,6 @@ final class GoLGrid {
         }
    }
    
-    
     private func executeNextGeneration() {
         for cell in cellGrid {
             executeNextAction(cell)
@@ -123,8 +109,9 @@ final class GoLGrid {
     }
     
     
+    // Calculates the next action of a cell
     func calculateNextAction(cell:GoLCell) {
-        cell.countNeighbors()
+        countNeighbors(cell)
         
         if cell.isAlive {
             switch cell.numberOfNeighbors {
@@ -138,12 +125,10 @@ final class GoLGrid {
         } else {
             switch cell.numberOfNeighbors {
             case 3:
-                if let colorGoLCell = cell as? GoLColorGoLCell {
-                    if colorGoLCell.redNeighbors > colorGoLCell.blueNeighbors {
-                        colorGoLCell.currentColor = GoLColorGoLCell.GoLCellColor.red
-                    } else {
-                        colorGoLCell.currentColor = GoLColorGoLCell.GoLCellColor.blue
-                    }
+                if cell.redNeighbors > cell.blueNeighbors {
+                    cell.currentColor = GoLCell.CellColor.red
+                } else {
+                    cell.currentColor = GoLCell.CellColor.blue
                 }
                 cell.nextAction = GoLCell.Action.Spawn
             default:
@@ -153,6 +138,7 @@ final class GoLGrid {
     }
     
     
+    // Adjusts the cell's Alive status based on a previously calculated action
     func executeNextAction(cell:GoLCell) {
         switch cell.nextAction {
         case GoLCell.Action.Idle:

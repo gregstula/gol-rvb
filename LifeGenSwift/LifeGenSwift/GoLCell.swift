@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GoLGoLCell: NSObject {
+final class GoLCell: NSObject {
 
     var isAlive:Bool = false
     var coordinates = (row:0, col:0)
@@ -26,19 +26,19 @@ final class GoLGoLCell: NSObject {
     var redNeighbors = 0
     var blueNeighbors = 0
 
-    enum GoLCellColor {
+    enum CellColor {
         case blue
         case red
     }
 
-    var currentColor = GoLCellColor.blue
+    var currentColor = CellColor.blue
 
     var spawnColor:UIColor {
-        return self.currentColor == GoLCellColor.blue ? UIColor.blueColor() : UIColor.redColor()
+        return self.currentColor == CellColor.blue ? UIColor.blueColor() : UIColor.redColor()
     }
 }
 
 // Overloading the == operator as per the Equatable protocol
-func ==(lhs: GoLGoLCell, rhs: GoLGoLCell) -> Bool {
+func ==(lhs: GoLCell, rhs: GoLCell) -> Bool {
     return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }
