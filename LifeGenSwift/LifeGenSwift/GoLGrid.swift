@@ -22,18 +22,18 @@ final class GoLGrid {
     let cellGrid:LiteMatrix<GoLCell>
     
     // Mark: Init
-    init (useColor answer:Bool, rowSize:Int, columnSize colSize:Int) {
+    init (rowSize:Int, columnSize colSize:Int) {
         rowMax = rowSize
         colMax = colSize
         cellGrid = LiteMatrix<GoLCell>(rows: rowSize, columns: colSize)
-        useColoredGoLCells = answer
         
-            for var i = 0; i < rowMax; i++ {
-                for var j = 0; j < colMax; j++ {
-                    cellGrid[i,j] = GoLCell()
-                }
+        for var i = 0; i < rowMax; i++ {
+            for var j = 0; j < colMax; j++ {
+                cellGrid[i,j] = GoLCell()
             }
+        }
     }
+    
     
     // MARK: Neighbor counting
     private func countNeighbors(cell:GoLCell) {
@@ -78,37 +78,7 @@ final class GoLGrid {
     }
 
 
-    // Mark: Generation handling
-    private func prepNextGeneration() {
-        // GoLCells should know where they are mapped on the matrix
-        if !self.cellsKnowTheirPosition {
-            for var i = 0; i < rowMax; i++ {
-                for var j = 0; j < colMax; j++ {
-                    cellGrid[i,j].coordinates = (row:i, col:j)
-                }
-            }
-            cellsKnowTheirPosition = true
-        }
-        
-        for cell in cellGrid {
-            calculateNextAction(cell)
-        }
-   }
-   
-    private func executeNextGeneration() {
-        for cell in cellGrid {
-            executeNextAction(cell)
-        }
-    }
-    
-    
-    func prepareAndExecuteNextGeneration() {
-        self.prepNextGeneration()
-        self.executeNextGeneration()
-        generationCount++
-    }
-    
-    
+    // Mark: Cell Methods
     // Calculates the next action of a cell
     func calculateNextAction(cell:GoLCell) {
         countNeighbors(cell)
@@ -148,6 +118,37 @@ final class GoLGrid {
         case GoLCell.Action.Die:
             cell.isAlive = false
         }
+    }
+    
+    
+    private func prepNextGeneration() {
+        // GoLCells should know where they are mapped on the matrix
+        if !self.cellsKnowTheirPosition {
+            for var i = 0; i < rowMax; i++ {
+                for var j = 0; j < colMax; j++ {
+                    cellGrid[i,j].coordinates = (row:i, col:j)
+                }
+            }
+            cellsKnowTheirPosition = true
+        }
+        
+        for cell in cellGrid {
+            calculateNextAction(cell)
+        }
+    }
+    
+    
+    private func executeNextGeneration() {
+        for cell in cellGrid {
+            executeNextAction(cell)
+        }
+    }
+    
+    
+    func prepareAndExecuteNextGeneration() {
+        self.prepNextGeneration()
+        self.executeNextGeneration()
+        generationCount++
     }
     
 }

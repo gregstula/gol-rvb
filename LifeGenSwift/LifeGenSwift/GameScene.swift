@@ -18,7 +18,7 @@ class GameScene: SKScene {
     /* Also indicates intial startup time in seconds */
     var timeSinceLastGeneration:Double = -3
     
-    let grid = GoLGrid(useColor:true, rowSize: 40, columnSize: 40)
+    let grid = GoLGrid(rowSize: 40, columnSize: 40)
     
     // MARK: Background Properties
     var backgroundImage:UIImage! = UIImage(contentsOfFile: "GridImage")
@@ -121,13 +121,7 @@ class GameScene: SKScene {
     
     
     private func determineGoLCellColor(coords:(row: Int, col: Int)) -> UIColor {
-        if let cell:GoLColorGoLCell = grid.cellGrid[coords.row, coords.col] as? GoLColorGoLCell {
-            return cell.spawnColor
-        } else if let _ = grid.cellGrid[coords.row, coords.col] as? GoLGoLCell {
-            return UIColor.blackColor()
-        } else {
-            return UIColor.purpleColor()
-        }
+        return grid.cellGrid[coords.row, coords.col].spawnColor
     }
     
     
