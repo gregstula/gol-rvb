@@ -1,3 +1,5 @@
 *.xcassets
+*.xcuserstate
+*.xcuserdatad
 .DS_Store
 DerivedData
