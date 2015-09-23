@@ -111,7 +111,7 @@ void ***_array;
     
     [self.arrayOfObjects replaceObjectAtIndex:row * col withObject:object];
     
-    _array[row][col] = (__bridge void*)object;
+    _array[row][col] = (__bridge void *)object;
     
 }
 

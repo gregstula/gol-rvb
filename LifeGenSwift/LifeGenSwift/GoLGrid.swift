@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GoLGrid {
+final class GoLGrid {
     
     // MARK: Properties
     let rowMax:Int
@@ -126,11 +126,11 @@ extension GoLGrid {
     func printGridToConsole() {
         for i in 0..<rowMax {
             for j in 0..<colMax {
-                cellGrid[i, j].isAlive ? print(" \(cellGrid[i,j].numberOfNeighbors)") : print(" . ")
+                cellGrid[i, j].isAlive ? print(" \(cellGrid[i,j].numberOfNeighbors)", terminator: "") : print(" . ", terminator: "")
             }
-            println()
+            print("")
         }
-        println()
-        println()
+        print("")
+        print("")
     }
 }

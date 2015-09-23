@@ -35,6 +35,7 @@ class GoLColorCell: GoLCell {
         self.init()
         currentGrid = grid
     }
+    
 
     // MARK: Color Counting
     // Function to count the amount of live neighbors
@@ -64,7 +65,7 @@ class GoLColorCell: GoLCell {
    
     internal func countNeighborByColor(rowOffset:Int, _ colOffset:Int) {
         if currentGrid != nil {
-            var cell = currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset] as? GoLColorCell
+            let cell = currentGrid!.cellGrid[coordinates.row + rowOffset, coordinates.col + colOffset] as? GoLColorCell
             
             if cell != nil {
                 if cell!.currentColor == CellColor.blue {

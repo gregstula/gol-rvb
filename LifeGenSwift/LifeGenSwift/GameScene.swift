@@ -11,24 +11,38 @@ import SpriteKit
 class GameScene: SKScene {
 
     // MARK: Properties
-    let cellSize:CGFloat = 20.0
-    // let buttonSize = (height:CGFloat(50.0), width:CGFloat(30))
-    let timeBetweenGenerations:Double = 0.5
+    let cellSpriteSize:CGFloat = 20.0
+    let timeBetweenGenerations:Double = 0.3
+    var previousTimeRecorded:CFTimeInterval?
+    
+    /* Also indicates intial startup time in seconds */
+    var timeSinceLastGeneration:Double = -3
     
     let grid = GoLGrid(useColor:true, rowSize: 40, columnSize: 40)
     
-    var previousTimeRecorded:CFTimeInterval?
-    // Also indicates intial startup time
-    var timeSinceLastGeneration:Double = -3
+    // MARK: Background Properties
+    var backgroundImage:UIImage! = UIImage(contentsOfFile: "GridImage")
+    let backgroundCoverageSize = CGSizeMake(2000, 2000)
+    let backgroundTile:CGRect = CGRectMake(0,0,360, 360)
     
+    let buttonSize:CGFloat = 40
+    lazy var colorButton:SKSpriteNode = { () -> SKSpriteNode in
+            var node = SKSpriteNode()
+            node.position = CGPointMake(15,100);
+            node.name = "colorButton"
+            node.zPosition = 1.0;
+            return node;
+        }()
     
+   
+    /* Called when user moves to view */
     override func didMoveToView(view: SKView) {
     }
     
     
     /* Called when a touch begins */
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        for touch in (touches as! Set<UITouch>) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in (touches ) {
             let location = touch.locationInNode(self)
             
             let coords = convertPixelsToCoordinates(location)
@@ -40,16 +54,17 @@ class GameScene: SKScene {
         }
     }
     
+    
     /* Called when a touch is dragged */
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        for touch in (touches as! Set<UITouch>) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in (touches ) {
             let location = touch.locationInNode(self)
             
             let coords = convertPixelsToCoordinates(location)
             
             if !grid.cellGrid[coords.row, coords.col].isAlive {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
-                self.renderCell(coords)
+                renderCell(coords)
             }
             
         }
@@ -58,22 +73,24 @@ class GameScene: SKScene {
 
     /* Called before each frame is rendered */
     override func update(currentTime: CFTimeInterval) {
-        let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
         
-        if (previousTimeRecorded != nil && !paused) {
-           timeSinceLastGeneration += (currentTime - previousTimeRecorded!)
+        if previousTimeRecorded != nil && !paused {
+            timeSinceLastGeneration += (currentTime - previousTimeRecorded!)
         }
         
         self.previousTimeRecorded = currentTime;
         
-        if (timeSinceLastGeneration > timeBetweenGenerations) {
+        if timeSinceLastGeneration > timeBetweenGenerations {
             timeSinceLastGeneration = 0
+            
+            /* Calculates cell positions for next gen on a seperate thread */
+            let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+            
             dispatch_async(dispatch_get_global_queue(qos, 0)) {
-                // grid.printGridToConsole()
-                // println("\(self.grid.generationCount)")
                 self.grid.prepareAndExecuteNextGeneration()
+                
+                /* Updates UI elements on the main therad */
                 dispatch_async(dispatch_get_main_queue()) {
-                    //grid.printGridToConsole()
                     self.removeAllChildren()
                     self.drawGrid()
                 }
@@ -85,18 +102,18 @@ class GameScene: SKScene {
     // MARK: Drawing GoL objects to scene
     func drawGrid() {
         for cell in grid.cellGrid {
+            let coords = cell.coordinates
             if cell.isAlive {
-                let coords = cell.coordinates
-                self.renderCell(coords)
+                renderCell(coords)
             }
         }
     }
-
+    
 
     private func renderCell(coordinates:(Int, Int)) -> SKSpriteNode {
         let sprite = SKSpriteNode()
         sprite.color = determineCellColor(coordinates)
-        sprite.size = CGSizeMake(cellSize, cellSize)
+        sprite.size = CGSizeMake(cellSpriteSize, cellSpriteSize)
         sprite.position = convertCoordinatesToPixels(coordinates)
         self.addChild(sprite)
         return sprite
@@ -106,7 +123,7 @@ class GameScene: SKScene {
     private func determineCellColor(coords:(row: Int, col: Int)) -> UIColor {
         if let cell:GoLColorCell = grid.cellGrid[coords.row, coords.col] as? GoLColorCell {
             return cell.spawnColor
-        } else if let cell = grid.cellGrid[coords.row, coords.col] as? GoLCell {
+        } else if let _ = grid.cellGrid[coords.row, coords.col] as? GoLCell {
             return UIColor.blackColor()
         } else {
             return UIColor.purpleColor()
@@ -116,12 +133,13 @@ class GameScene: SKScene {
     
     // MARK: Conversions
     func convertCoordinatesToPixels(coords:(row: Int, col: Int)) -> CGPoint{
-        return CGPointMake(CGFloat(coords.row) * cellSize, CGFloat(coords.col) * cellSize)
+        return CGPointMake(CGFloat(coords.row) * cellSpriteSize, CGFloat(coords.col) * cellSpriteSize)
     }
     
     
     func convertPixelsToCoordinates(pixel: CGPoint) -> (row: Int, col: Int) {
-        var row = Int(floor(pixel.x / cellSize)), col = Int(floor(pixel.y / cellSize))
+        let row = Int(floor(pixel.x / cellSpriteSize))
+        let col = Int(floor(pixel.y / cellSpriteSize))
         return (row, col)
     }
    

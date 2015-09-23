@@ -8,8 +8,8 @@
 
 import UIKit
 
-// Abstract
-class Cell: NSObject, Equatable {
+// Abstract Class
+class Cell: NSObject {
 
      enum Action {
         case Idle
@@ -29,7 +29,7 @@ class Cell: NSObject, Equatable {
         currentGrid = grid
     }
     
-    func countNeighbors() {}
+    func countNeighbors() { assert(false, "MUST OVERRIDE")}
 }
 
 

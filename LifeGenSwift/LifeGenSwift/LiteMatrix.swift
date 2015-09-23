@@ -69,9 +69,9 @@ class LiteMatrix<T: NSObject> {
 
 
     private func getObjectFromMatrixAtRow(row: Int, column col: Int) -> T {
-        var nilWarning = "Nil returned from matrix at index \(row), \(col)"
+        let nilWarning = "Nil returned from matrix at index \(row), \(col)"
         
-        var obj = matrix.accessObjectAtRow(row, column: col) as? T
+        let obj = matrix.accessObjectAtRow(row, column: col) as? T
         assert(obj != nil, nilWarning)
         return obj!
     }
@@ -95,6 +95,7 @@ class LiteMatrix<T: NSObject> {
 }
 
 
+// MARK: Implementation of CollectionType Protocol
 extension LiteMatrix : CollectionType {
     typealias Index = Int
     
@@ -109,7 +110,7 @@ extension LiteMatrix : CollectionType {
     
     
     // Generator for implementing for..in iteration
-    func generate() -> GeneratorOf<T> {
+    func generate() -> AnyGenerator<T> {
     
         let rowMax = rowCapacity
         let colMax = colCapacity
@@ -118,7 +119,7 @@ extension LiteMatrix : CollectionType {
         var colIndex = 0
         
         // Passes function definition for next() on init with a closure
-        return GeneratorOf<T> {
+        return anyGenerator {
             if rowIndex < rowMax {
                 if colIndex < colMax {
                     return self.getObjectFromMatrixAtRow(rowIndex, column: colIndex++)
