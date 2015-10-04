@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A03952D1BC168AB00E44546 /* ObjcLiteMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03952C1BC168AB00E44546 /* ObjcLiteMatrix.m */; settings = {ASSET_TAGS = (); }; };
 		2A8D7EE01BA64F17004634EA /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D7EDF1BA64F17004634EA /* GameMenuViewController.swift */; };
 		2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88F961B9F942700D9A169 /* AppDelegate.swift */; };
 		2AB88F991B9F942700D9A169 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88F981B9F942700D9A169 /* GameScene.sks */; };
@@ -19,7 +20,6 @@
 		2AB88FBB1B9F965F00D9A169 /* GoLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FBA1B9F965F00D9A169 /* GoLCell.swift */; };
 		2AB88FC51B9F967C00D9A169 /* GoLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */; };
 		2AB88FC61B9F967C00D9A169 /* LiteMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FC01B9F967C00D9A169 /* LiteMatrix.swift */; };
-		2AB88FC71B9F967C00D9A169 /* ObjcLiteMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FC31B9F967C00D9A169 /* ObjcLiteMatrix.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A03952C1BC168AB00E44546 /* ObjcLiteMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcLiteMatrix.m; sourceTree = "<group>"; };
+		2A03952E1BC168E700E44546 /* ObjcLiteMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcLiteMatrix.h; sourceTree = "<group>"; };
 		2A8D7EDF1BA64F17004634EA /* GameMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
 		2AB88F911B9F942700D9A169 /* LifeGenSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeGenSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB88F951B9F942700D9A169 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,8 +53,6 @@
 		2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoLGrid.swift; path = ../LifeGenSwift/GoLGrid.swift; sourceTree = "<group>"; };
 		2AB88FBF1B9F967C00D9A169 /* LiteContainers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiteContainers.h; sourceTree = "<group>"; };
 		2AB88FC01B9F967C00D9A169 /* LiteMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiteMatrix.swift; sourceTree = "<group>"; };
-		2AB88FC21B9F967C00D9A169 /* ObjcLiteMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcLiteMatrix.h; sourceTree = "<group>"; };
-		2AB88FC31B9F967C00D9A169 /* ObjcLiteMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcLiteMatrix.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +114,8 @@
 				2AB88FBF1B9F967C00D9A169 /* LiteContainers.h */,
 				2AB88FBC1B9F967C00D9A169 /* LifeGenSwift-Bridging-Header.h */,
 				2AB88FC01B9F967C00D9A169 /* LiteMatrix.swift */,
-				2AB88FC21B9F967C00D9A169 /* ObjcLiteMatrix.h */,
-				2AB88FC31B9F967C00D9A169 /* ObjcLiteMatrix.m */,
+				2A03952E1BC168E700E44546 /* ObjcLiteMatrix.h */,
+				2A03952C1BC168AB00E44546 /* ObjcLiteMatrix.m */,
 				2AB88F951B9F942700D9A169 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -200,6 +200,7 @@
 				TargetAttributes = {
 					2AB88F901B9F942700D9A169 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = RLB5J6D82G;
 					};
 					2AB88FA91B9F942700D9A169 = {
 						CreatedOnToolsVersion = 6.4;
@@ -256,8 +257,8 @@
 				2AB88F9D1B9F942700D9A169 /* GameViewController.swift in Sources */,
 				2AB88FC51B9F967C00D9A169 /* GoLGrid.swift in Sources */,
 				2AB88FC61B9F967C00D9A169 /* LiteMatrix.swift in Sources */,
+				2A03952D1BC168AB00E44546 /* ObjcLiteMatrix.m in Sources */,
 				2A8D7EE01BA64F17004634EA /* GameMenuViewController.swift in Sources */,
-				2AB88FC71B9F967C00D9A169 /* ObjcLiteMatrix.m in Sources */,
 				2AB88FBB1B9F965F00D9A169 /* GoLCell.swift in Sources */,
 				2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */,
 			);
@@ -388,10 +389,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LifeGenSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Greg-D-Stula.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeGenSwift/LifeGenSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -403,10 +407,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LifeGenSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Greg-D-Stula.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeGenSwift/LifeGenSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

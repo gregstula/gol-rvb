@@ -84,6 +84,10 @@ class GameScene: SKScene {
             timeSinceLastGeneration = 0
             
             /* Calculates cell positions for next gen on a seperate thread */
+            guard !paused else {
+                return
+            }
+            
             let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
             
             dispatch_async(dispatch_get_global_queue(qos, 0)) {
