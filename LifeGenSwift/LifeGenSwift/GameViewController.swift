@@ -67,6 +67,17 @@ class GameViewController: UIViewController {
         
     }
 
+    @IBAction func colorSettingPress(sender: UIBarButtonItem)
+    {
+        if sender.title == "🔵" {
+            scene.colorSetting = .red
+            sender.title = "🔴"
+        } else {
+            scene.colorSetting = .blue
+            sender.title = "🔵"
+        }
+    }
+    
     override func shouldAutorotate() -> Bool
     {
         return true

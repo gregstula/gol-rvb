@@ -14,16 +14,8 @@ class GOLGameScene: SKScene {
     // MARK: Properties
     let grid = GOLGrid(rowSize: 40, columnSize: 40)
     
-    
-    /* Called when user moves to view */
-    override func didMoveToView(view: SKView)
-    {
-        //showHud()
-    }
-    
     // MARK: Cell Color Properties
-    typealias CellColor = GOLCell.CellColor
-    var colorSetting:CellColor = CellColor.blue
+    var colorSetting:GOLCell.CellColor = .red
     
     /* Called when a touch begins */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -36,7 +28,7 @@ class GOLGameScene: SKScene {
             let cell = grid.cellGrid[coords.row, coords.col]
             if !cell.isAlive {
                 cell.isAlive = true
-                cell.currentColor = colorSetting
+                cell.spawnColor = colorSetting
                 self.renderGOLCell(coords)
             }
         }
@@ -54,7 +46,7 @@ class GOLGameScene: SKScene {
             let cell = grid.cellGrid[coords.row, coords.col]
             if !cell.isAlive {
                 cell.isAlive = true
-                cell.currentColor = colorSetting
+                cell.spawnColor = colorSetting
                 self.renderGOLCell(coords)
             }
             
@@ -83,22 +75,22 @@ class GOLGameScene: SKScene {
         if timeSinceLastGeneration > timeBetweenGenerations {
             timeSinceLastGeneration = 0
             
-            /* Calculates cell positions for next gen on a seperate thread */
             guard !paused else {
                 return
             }
             
-            let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+            /* Calculates cell positions for next gen on a seperate thread */
+           // let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
             
-            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+            //dispatch_async(dispatch_get_global_queue(qos, 0)) {
                 self.grid.prepareAndExecuteNextGeneration()
                 
                 /* Updates UI elements on the main therad */
-                dispatch_async(dispatch_get_main_queue()) {
+             //   dispatch_async(dispatch_get_main_queue()) {
                     self.removeAllChildren()
                     self.renderGrid()
-                }
-            }
+              //  }
+           // }
         }
     }
 
@@ -128,7 +120,21 @@ class GOLGameScene: SKScene {
     
     private func determineGOLCellColor(coords:(row:Int, col:Int)) -> UIColor
     {
-        return grid.cellGrid[coords.row, coords.col].spawnColor
+        let cell = grid.cellGrid[coords.row, coords.col]
+        var color:UIColor
+        
+        print("\(coords) red:\(cell.redNeighbors) blue:\(cell.blueNeighbors)")
+        
+        switch cell.spawnColor {
+            case .blue:
+                color = .blueColor()
+            case .red:
+                color = .redColor()
+            case .dead:
+                color = .blackColor()
+        }
+        
+        return color
     }
     
     
@@ -147,13 +153,4 @@ class GOLGameScene: SKScene {
         return (row, col)
     }
     
-    
-   // MARK: UI Elements
-    func showHud()
-    {
-        let hud = GOLHud(frame:CGRect(x: 0, y: 0, width: 35, height: 35))
-        
-        self.view?.addSubview(hud)
-    }
-   
 }

@@ -32,7 +32,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhW-va-Y8k">
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhW-va-Y8k">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem title="▶︎" id="FCT-i6-DDv">
@@ -40,7 +40,12 @@
                                             <action selector="playButtonPress:" destination="LVB-YS-i5n" id="Poa-NO-51A"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="🔵" width="1039" id="wos-Y9-KXj"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DHr-LB-qnl"/>
+                                    <barButtonItem title="🔵" width="10" id="wos-Y9-KXj">
+                                        <connections>
+                                            <action selector="colorSettingPress:" destination="LVB-YS-i5n" id="TLI-2K-6R4"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

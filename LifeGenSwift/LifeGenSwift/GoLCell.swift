@@ -25,16 +25,19 @@ final class GOLCell: NSObject {
     // MARK: Color Properties
     var redNeighbors = 0
     var blueNeighbors = 0
-    var currentColor = CellColor.blue
+    var spawnColor = CellColor.dead
 
     enum CellColor {
         case blue
         case red
+        case dead
     }
-
-
-    var spawnColor:UIColor {
-        return self.currentColor == CellColor.blue ? UIColor.blueColor() : UIColor.redColor()
+    
+    
+    func resetNeighborColorCount()
+    {
+        redNeighbors = 0
+        blueNeighbors = 0
     }
 }
 
