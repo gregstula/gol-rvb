@@ -1,4 +1,4 @@
-//  GoLGoLCell.swift
+//  GOLGOLCell.swift
 //  LifeGenSwift
 //
 //  Created by Gregory D. Stula on 8/30/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GoLCell: NSObject {
+final class GOLCell: NSObject {
 
     var isAlive:Bool = false
     var coordinates = (row:0, col:0)
@@ -39,6 +39,6 @@ final class GoLCell: NSObject {
 }
 
 // Overloading the == operator as per the Equatable protocol
-func ==(lhs: GoLCell, rhs: GoLCell) -> Bool {
+func ==(lhs: GOLCell, rhs: GOLCell) -> Bool {
     return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }

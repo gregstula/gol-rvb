@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GOLGameScene: SKScene {
 
     // MARK: Properties
     let cellSpriteSize:CGFloat = 20.0
@@ -18,7 +18,7 @@ class GameScene: SKScene {
     /* Also indicates intial startup time in seconds */
     var timeSinceLastGeneration:Double = -3
     
-    let grid = GoLGrid(rowSize: 40, columnSize: 40)
+    let grid = GOLGrid(rowSize: 40, columnSize: 40)
     
     /* Called when user moves to view */
     override func didMoveToView(view: SKView)
@@ -36,7 +36,7 @@ class GameScene: SKScene {
             
             if !grid.cellGrid[coords.row, coords.col].isAlive {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
-                self.renderGoLCell(coords)
+                self.renderGOLCell(coords)
             }
         }
     }
@@ -52,7 +52,7 @@ class GameScene: SKScene {
             
             if !grid.cellGrid[coords.row, coords.col].isAlive {
                 grid.cellGrid[coords.row, coords.col].isAlive = true
-                renderGoLCell(coords)
+                renderGOLCell(coords)
             }
             
         }
@@ -92,22 +92,22 @@ class GameScene: SKScene {
     }
 
 
-    // MARK: Drawing GoL objects to scene
+    // MARK: Drawing GOL objects to scene
     func drawGrid()
     {
         for cell in grid.cellGrid {
             let coords = cell.coordinates
             if cell.isAlive {
-                renderGoLCell(coords)
+                renderGOLCell(coords)
             }
         }
     }
     
 
-    private func renderGoLCell(coordinates:(Int, Int)) -> SKSpriteNode
+    private func renderGOLCell(coordinates:(Int, Int)) -> SKSpriteNode
     {
         let sprite = SKSpriteNode()
-        sprite.color = determineGoLCellColor(coordinates)
+        sprite.color = determineGOLCellColor(coordinates)
         sprite.size = CGSizeMake(cellSpriteSize, cellSpriteSize)
         sprite.position = convertCoordinatesToPixels(coordinates)
         self.addChild(sprite)
@@ -115,7 +115,7 @@ class GameScene: SKScene {
     }
     
     
-    private func determineGoLCellColor(coords:(row: Int, col: Int)) -> UIColor
+    private func determineGOLCellColor(coords:(row: Int, col: Int)) -> UIColor
     {
         return grid.cellGrid[coords.row, coords.col].spawnColor
     }
