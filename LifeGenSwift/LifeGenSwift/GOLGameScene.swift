@@ -9,22 +9,21 @@
 import SpriteKit
 
 class GOLGameScene: SKScene {
+    
 
     // MARK: Properties
-    let cellSpriteSize:CGFloat = 20.0
-    let timeBetweenGenerations:Double = 0.3
-    var previousTimeRecorded:CFTimeInterval?
-    
-    /* Also indicates intial startup time in seconds */
-    var timeSinceLastGeneration:Double = -3
-    
     let grid = GOLGrid(rowSize: 40, columnSize: 40)
+    
     
     /* Called when user moves to view */
     override func didMoveToView(view: SKView)
     {
-        
+        //showHud()
     }
+    
+    // MARK: Cell Color Properties
+    typealias CellColor = GOLCell.CellColor
+    var colorSetting:CellColor = CellColor.blue
     
     /* Called when a touch begins */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -34,8 +33,10 @@ class GOLGameScene: SKScene {
             
             let coords = convertPixelsToCoordinates(location)
             
-            if !grid.cellGrid[coords.row, coords.col].isAlive {
-                grid.cellGrid[coords.row, coords.col].isAlive = true
+            let cell = grid.cellGrid[coords.row, coords.col]
+            if !cell.isAlive {
+                cell.isAlive = true
+                cell.currentColor = colorSetting
                 self.renderGOLCell(coords)
             }
         }
@@ -50,15 +51,25 @@ class GOLGameScene: SKScene {
             
             let coords = convertPixelsToCoordinates(location)
             
-            if !grid.cellGrid[coords.row, coords.col].isAlive {
-                grid.cellGrid[coords.row, coords.col].isAlive = true
-                renderGOLCell(coords)
+            let cell = grid.cellGrid[coords.row, coords.col]
+            if !cell.isAlive {
+                cell.isAlive = true
+                cell.currentColor = colorSetting
+                self.renderGOLCell(coords)
             }
             
         }
     }
-
-
+    
+    
+    // MARK: Timing Properties
+    let cellSpriteSize:CGFloat = 20.0
+    let timeBetweenGenerations:Double = 0.3
+    var previousTimeRecorded:CFTimeInterval?
+    
+    /* Also indicates intial startup time in seconds */
+    var timeSinceLastGeneration:Double = -3
+    
     /* Called before each frame is rendered */
     override func update(currentTime: CFTimeInterval)
     {
@@ -85,15 +96,15 @@ class GOLGameScene: SKScene {
                 /* Updates UI elements on the main therad */
                 dispatch_async(dispatch_get_main_queue()) {
                     self.removeAllChildren()
-                    self.drawGrid()
+                    self.renderGrid()
                 }
             }
         }
     }
 
 
-    // MARK: Drawing GOL objects to scene
-    func drawGrid()
+    // MARK: Drawing
+    func renderGrid()
     {
         for cell in grid.cellGrid {
             let coords = cell.coordinates
@@ -115,25 +126,34 @@ class GOLGameScene: SKScene {
     }
     
     
-    private func determineGOLCellColor(coords:(row: Int, col: Int)) -> UIColor
+    private func determineGOLCellColor(coords:(row:Int, col:Int)) -> UIColor
     {
         return grid.cellGrid[coords.row, coords.col].spawnColor
     }
     
     
     // MARK: Conversions
-    func convertCoordinatesToPixels(coords:(row: Int, col: Int)) -> CGPoint
+    func convertCoordinatesToPixels(coords:(row:Int, col:Int)) -> CGPoint
     {
         return CGPointMake(CGFloat(coords.row) * cellSpriteSize,
                             CGFloat(coords.col) * cellSpriteSize)
     }
     
     
-    func convertPixelsToCoordinates(pixel: CGPoint) -> (row: Int, col: Int)
+    func convertPixelsToCoordinates(pixel:CGPoint) -> (row:Int, col:Int)
     {
         let row = Int(pixel.x / cellSpriteSize)
         let col = Int(pixel.y / cellSpriteSize)
         return (row, col)
+    }
+    
+    
+   // MARK: UI Elements
+    func showHud()
+    {
+        let hud = GOLHud(frame:CGRect(x: 0, y: 0, width: 35, height: 35))
+        
+        self.view?.addSubview(hud)
     }
    
 }

@@ -30,11 +30,14 @@ extension SKNode {
 
 class GameViewController: UIViewController {
 
+    var scene:GOLGameScene!
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        if let scene = GOLGameScene.unarchiveFromFile("GOLGameScene") as? GOLGameScene {
+        scene = GOLGameScene.unarchiveFromFile("GOLGameScene") as? GOLGameScene
+        if scene != nil {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -47,10 +50,22 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
             
             skView.presentScene(scene)
+            scene.paused = true
             
         }
     }
     
+    @IBAction func playButtonPress(sender: UIBarButtonItem)
+    {
+        if sender.title == "▶︎" {
+            sender.title = "■"
+            scene.paused = false
+        } else {
+            sender.title = "▶︎"
+            scene.paused = true
+        }
+        
+    }
 
     override func shouldAutorotate() -> Bool
     {
