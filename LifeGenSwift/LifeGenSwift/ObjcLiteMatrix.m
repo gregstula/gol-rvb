@@ -13,7 +13,7 @@
 
 @interface ObjcLiteMatrix() {
     // The 2D array
-    void ***_array;
+    void*** _array;
 }
 
 @property (nonatomic) NSInteger rowCapacity;
@@ -49,10 +49,10 @@
         
         
         // dynamically allocate the C-style array used to to hold dumb pointers to objects
-        _array = malloc(_rowCapacity * sizeof(void **));
+        _array = malloc(_rowCapacity * sizeof(void**));
         
         for (int i = 0; i < _rowCapacity; i++) {
-            _array[i] = malloc(_colCapacity * sizeof(void *));
+            _array[i] = malloc(_colCapacity * sizeof(void*));
         }
         
         // Allocate NSMutableArray with explicit capicity

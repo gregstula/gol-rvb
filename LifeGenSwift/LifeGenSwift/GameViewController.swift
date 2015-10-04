@@ -10,7 +10,9 @@ import UIKit
 import SpriteKit
 
 extension SKNode {
-    class func unarchiveFromFile(file : String) -> SKNode? {
+
+    class func unarchiveFromFile(file : String) -> SKNode?
+    {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
             let sceneData = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
             let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
@@ -28,7 +30,8 @@ extension SKNode {
 
 class GameViewController: UIViewController {
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
@@ -47,26 +50,35 @@ class GameViewController: UIViewController {
             
         }
     }
+    
 
-    override func shouldAutorotate() -> Bool {
+    override func shouldAutorotate() -> Bool
+    {
         return true
     }
+    
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
+    {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return UIInterfaceOrientationMask.AllButUpsideDown
         } else {
             return UIInterfaceOrientationMask.All
         }
     }
+    
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
+    
 
-    override func prefersStatusBarHidden() -> Bool {
+    override func prefersStatusBarHidden() -> Bool
+    {
         return true
     }
+    
 }
 
