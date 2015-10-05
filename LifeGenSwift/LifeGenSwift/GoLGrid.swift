@@ -163,6 +163,14 @@ final class GOLGrid {
         generationCount++
     }
     
+    
+    func killAll()
+    {
+        for cell in cellGrid {
+            cell.isAlive = false
+        }
+            
+    }
 }
 
 

@@ -48,12 +48,14 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            scene.connection = self
             
             skView.presentScene(scene)
             scene.paused = true
-            
         }
     }
+    
+    @IBOutlet weak var gameTitle: UINavigationItem!
     
     @IBAction func playButtonPress(sender: UIBarButtonItem)
     {
@@ -66,7 +68,16 @@ class GameViewController: UIViewController {
         }
         
     }
+    
 
+    @IBAction func clearAll(sender: UIBarButtonItem) {
+        guard scene.paused else {
+            return
+        }
+        scene.grid.killAll()
+    }
+    
+    
     @IBAction func colorSettingPress(sender: UIBarButtonItem)
     {
         if sender.title == "🔵" {

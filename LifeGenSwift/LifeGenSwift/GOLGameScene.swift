@@ -9,15 +9,20 @@
 import SpriteKit
 
 class GOLGameScene: SKScene {
+
+    weak var connection:GameViewController?
     
 
     // MARK: Properties
-    let grid = GOLGrid(rowSize: 40, columnSize: 40)
+    let grid = GOLGrid(rowSize: 80, columnSize: 80)
+    var generation:Int {
+        return grid.generationCount
+    }
     
     var addOnNextTouch:Bool = false
     
     // MARK: Cell Color Properties
-    var colorSetting:GOLCell.CellColor = .red
+    var colorSetting:GOLCell.CellColor = .blue
     
     /* Called when a touch begins */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -60,9 +65,7 @@ class GOLGameScene: SKScene {
     let cellSpriteSize:CGFloat = 20.0
     let timeBetweenGenerations:Double = 0.3
     var previousTimeRecorded:CFTimeInterval?
-    
-    /* Also indicates intial startup time in seconds */
-    var timeSinceLastGeneration:Double = -3
+    var timeSinceLastGeneration:Double = 0
     
     /* Called before each frame is rendered */
     override func update(currentTime: CFTimeInterval)
@@ -82,17 +85,18 @@ class GOLGameScene: SKScene {
             }
             
             /* Calculates cell positions for next gen on a seperate thread */
-           // let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+           let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
             
-            //dispatch_async(dispatch_get_global_queue(qos, 0)) {
+           dispatch_async(dispatch_get_global_queue(qos, 0)) {
                 self.grid.prepareAndExecuteNextGeneration()
                 
                 /* Updates UI elements on the main therad */
-             //   dispatch_async(dispatch_get_main_queue()) {
+               dispatch_async(dispatch_get_main_queue()) {
                     self.removeAllChildren()
                     self.renderGrid()
-              //  }
-           // }
+                    self.connection?.gameTitle.title = "Generation \(self.generation)"
+                }
+            }
         }
     }
 
@@ -124,8 +128,6 @@ class GOLGameScene: SKScene {
     {
         let cell = grid.cellGrid[coords.row, coords.col]
         var color:UIColor
-        
-        print("\(coords) red:\(cell.redNeighbors) blue:\(cell.blueNeighbors)")
         
         switch cell.spawnColor {
             case .blue:
