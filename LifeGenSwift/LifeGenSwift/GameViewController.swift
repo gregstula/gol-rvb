@@ -71,9 +71,6 @@ class GameViewController: UIViewController {
     
 
     @IBAction func clearAll(sender: UIBarButtonItem) {
-        guard scene.paused else {
-            return
-        }
         scene.grid.killAll()
     }
     
