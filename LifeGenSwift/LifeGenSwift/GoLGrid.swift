@@ -109,10 +109,8 @@ final class GOLGrid {
                 } else if cell.redNeighbors < cell.blueNeighbors {
                     cell.spawnColor = .blue
                 }
-                cell.nextAction = .Spawn
                 
-            } else {
-                cell.nextAction = .Idle
+                cell.nextAction = .Spawn
             }
         }
     }

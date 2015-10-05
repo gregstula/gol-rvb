@@ -35,6 +35,7 @@
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhW-va-Y8k">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sek-V4-ldT"/>
                                     <barButtonItem title="▶︎" id="FCT-i6-DDv">
                                         <connections>
                                             <action selector="playButtonPress:" destination="LVB-YS-i5n" id="Poa-NO-51A"/>

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A1A61D81BC1F96F00E6FEE5 /* GOLPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1A61D71BC1F96F00E6FEE5 /* GOLPatterns.swift */; settings = {ASSET_TAGS = (); }; };
+		2A7C0E5A1BC2021900845945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A7C0E581BC2021900845945 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88F961B9F942700D9A169 /* AppDelegate.swift */; };
 		2AB88F991B9F942700D9A169 /* GOLGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88F981B9F942700D9A169 /* GOLGameScene.sks */; };
 		2AB88F9B1B9F942700D9A169 /* GOLGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88F9A1B9F942700D9A169 /* GOLGameScene.swift */; };
 		2AB88F9D1B9F942700D9A169 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88F9C1B9F942700D9A169 /* GameViewController.swift */; };
-		2AB88FA01B9F942700D9A169 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88F9E1B9F942700D9A169 /* Main.storyboard */; };
 		2AB88FA21B9F942700D9A169 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88FA11B9F942700D9A169 /* Images.xcassets */; };
 		2AB88FA51B9F942700D9A169 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AB88FA31B9F942700D9A169 /* LaunchScreen.xib */; };
 		2AB88FB11B9F942700D9A169 /* LifeGenSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB88FB01B9F942700D9A169 /* LifeGenSwiftTests.swift */; };
@@ -20,7 +21,6 @@
 		2AC105491BC19A2F00119523 /* LiteMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC105451BC19A2F00119523 /* LiteMatrix.swift */; settings = {ASSET_TAGS = (); }; };
 		2AC1054B1BC19A2F00119523 /* ObjcLiteMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC105481BC19A2F00119523 /* ObjcLiteMatrix.m */; settings = {ASSET_TAGS = (); }; };
 		2AC1054F1BC19ADF00119523 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC1054E1BC19ADF00119523 /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
-		2AC105531BC19E3D00119523 /* GOLHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC105521BC19E3D00119523 /* GOLHud.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +34,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A1A61D71BC1F96F00E6FEE5 /* GOLPatterns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GOLPatterns.swift; sourceTree = "<group>"; };
+		2A7C0E591BC2021900845945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB88F911B9F942700D9A169 /* LifeGenSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeGenSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB88F961B9F942700D9A169 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AB88F981B9F942700D9A169 /* GOLGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GOLGameScene.sks; sourceTree = "<group>"; };
 		2AB88F9A1B9F942700D9A169 /* GOLGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOLGameScene.swift; sourceTree = "<group>"; };
 		2AB88F9C1B9F942700D9A169 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		2AB88F9F1B9F942700D9A169 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB88FA11B9F942700D9A169 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2AB88FA41B9F942700D9A169 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2AB88FAA1B9F942700D9A169 /* LifeGenSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGenSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +54,6 @@
 		2AC105471BC19A2F00119523 /* ObjcLiteMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcLiteMatrix.h; path = LifeGenSwift/ObjcLiteMatrix.h; sourceTree = SOURCE_ROOT; };
 		2AC105481BC19A2F00119523 /* ObjcLiteMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjcLiteMatrix.m; path = LifeGenSwift/ObjcLiteMatrix.m; sourceTree = SOURCE_ROOT; };
 		2AC1054E1BC19ADF00119523 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		2AC105521BC19E3D00119523 /* GOLHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GOLHud.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,12 +96,11 @@
 		2AB88F931B9F942700D9A169 /* LifeGenSwift */ = {
 			isa = PBXGroup;
 			children = (
-				2AC105521BC19E3D00119523 /* GOLHud.swift */,
 				2AB88F961B9F942700D9A169 /* AppDelegate.swift */,
 				2AB88F981B9F942700D9A169 /* GOLGameScene.sks */,
 				2AB88F9A1B9F942700D9A169 /* GOLGameScene.swift */,
 				2AB88F9C1B9F942700D9A169 /* GameViewController.swift */,
-				2AB88F9E1B9F942700D9A169 /* Main.storyboard */,
+				2A7C0E581BC2021900845945 /* Main.storyboard */,
 				2AB88FA11B9F942700D9A169 /* Images.xcassets */,
 				2AB88FA31B9F942700D9A169 /* LaunchScreen.xib */,
 				2AB88FC81B9F971000D9A169 /* Models */,
@@ -145,6 +144,7 @@
 			children = (
 				2AB88FBA1B9F965F00D9A169 /* GoLCell.swift */,
 				2AB88FBE1B9F967C00D9A169 /* GoLGrid.swift */,
+				2A1A61D71BC1F96F00E6FEE5 /* GOLPatterns.swift */,
 			);
 			name = Models;
 			path = ../LifeGenSwift.xcodeproj;
@@ -234,10 +234,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AB88FA51B9F942700D9A169 /* LaunchScreen.xib in Resources */,
+				2A7C0E5A1BC2021900845945 /* Main.storyboard in Resources */,
 				2AB88FA21B9F942700D9A169 /* Images.xcassets in Resources */,
 				2AB88F991B9F942700D9A169 /* GOLGameScene.sks in Resources */,
 				2AC1054F1BC19ADF00119523 /* Default-568h@2x.png in Resources */,
-				2AB88FA01B9F942700D9A169 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +259,9 @@
 				2AB88F9B1B9F942700D9A169 /* GOLGameScene.swift in Sources */,
 				2AB88F9D1B9F942700D9A169 /* GameViewController.swift in Sources */,
 				2AB88FC51B9F967C00D9A169 /* GoLGrid.swift in Sources */,
-				2AC105531BC19E3D00119523 /* GOLHud.swift in Sources */,
 				2AB88FBB1B9F965F00D9A169 /* GoLCell.swift in Sources */,
 				2AC105491BC19A2F00119523 /* LiteMatrix.swift in Sources */,
+				2A1A61D81BC1F96F00E6FEE5 /* GOLPatterns.swift in Sources */,
 				2AB88F971B9F942700D9A169 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,10 +285,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2AB88F9E1B9F942700D9A169 /* Main.storyboard */ = {
+		2A7C0E581BC2021900845945 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2AB88F9F1B9F942700D9A169 /* Base */,
+				2A7C0E591BC2021900845945 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

@@ -14,6 +14,8 @@ class GOLGameScene: SKScene {
     // MARK: Properties
     let grid = GOLGrid(rowSize: 40, columnSize: 40)
     
+    var addOnNextTouch:Bool = false
+    
     // MARK: Cell Color Properties
     var colorSetting:GOLCell.CellColor = .red
     
@@ -24,8 +26,8 @@ class GOLGameScene: SKScene {
             let location = touch.locationInNode(self)
             
             let coords = convertPixelsToCoordinates(location)
-            
             let cell = grid.cellGrid[coords.row, coords.col]
+            
             if !cell.isAlive {
                 cell.isAlive = true
                 cell.spawnColor = colorSetting
