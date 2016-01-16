@@ -10,8 +10,7 @@ import Foundation
 
 extension GOLGrid {
     
-    func insertGlideGunWithCenter(row:Int, col:Int)
-    {
+    func insertGlideGunWithCenter(row:Int, col:Int) {
         
        cellGrid[row, col].isAlive = true;
         

@@ -11,8 +11,7 @@ import SpriteKit
 
 extension SKNode {
 
-    class func unarchiveFromFile(file : String) -> SKNode?
-    {
+    class func unarchiveFromFile(file : String) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
             let sceneData = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
             let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
@@ -32,8 +31,7 @@ class GameViewController: UIViewController {
 
     var scene:GOLGameScene!
 
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         scene = GOLGameScene.unarchiveFromFile("GOLGameScene") as? GOLGameScene
@@ -57,8 +55,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var gameTitle: UINavigationItem!
     
-    @IBAction func playButtonPress(sender: UIBarButtonItem)
-    {
+    @IBAction func playButtonPress(sender: UIBarButtonItem) {
         if sender.title == "▶︎" {
             sender.title = "■"
             scene.paused = false
@@ -75,8 +72,7 @@ class GameViewController: UIViewController {
     }
     
     
-    @IBAction func colorSettingPress(sender: UIBarButtonItem)
-    {
+    @IBAction func colorSettingPress(sender: UIBarButtonItem) {
         if sender.title == "🔵" {
             scene.colorSetting = .red
             sender.title = "🔴"
@@ -86,14 +82,12 @@ class GameViewController: UIViewController {
         }
     }
     
-    override func shouldAutorotate() -> Bool
-    {
+    override func shouldAutorotate() -> Bool {
         return true
     }
     
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
-    {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return UIInterfaceOrientationMask.AllButUpsideDown
         } else {
@@ -102,15 +96,13 @@ class GameViewController: UIViewController {
     }
     
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
     
 
-    override func prefersStatusBarHidden() -> Bool
-    {
+    override func prefersStatusBarHidden() -> Bool {
         return true
     }
     

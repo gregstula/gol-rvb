@@ -41,8 +41,12 @@ docs/_build
 # Finder metadata
 .DS_Store
 
+# Evil directory of headaches
+DerivedData
+
 #==============================================================================#
 # Ignore CMake temporary files
 #==============================================================================#
 CMakeCache.txt
 CMakeFiles
+

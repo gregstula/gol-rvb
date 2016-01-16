@@ -22,8 +22,7 @@ final class GOLGrid {
     let cellGrid:LiteMatrix<GOLCell>
     
     // Mark: Init
-    init (rowSize:Int, columnSize colSize:Int)
-    {
+    init (rowSize:Int, columnSize colSize:Int) {
         rowMax = rowSize
         colMax = colSize
         cellGrid = LiteMatrix<GOLCell>(rows: rowSize, columns: colSize)
@@ -37,8 +36,7 @@ final class GOLGrid {
     
     
     // MARK: Neighbor counting
-    private func countNeighbors(cell:GOLCell)
-    {
+    private func countNeighbors(cell:GOLCell) {
         cell.numberOfNeighbors = 0
         cell.resetNeighborColorCount()
         
@@ -66,15 +64,13 @@ final class GOLGrid {
     
     
     // Helper Method for looking up alive status of Neighbors
-    func neighborAliveAt(cell:GOLCell, _ rowOffset:Int, _ colOffset:Int) -> Bool
-    {
+    func neighborAliveAt(cell:GOLCell, _ rowOffset:Int, _ colOffset:Int) -> Bool {
         return cellGrid[cell.coordinates.row + rowOffset, cell.coordinates.col + colOffset].isAlive
     }
     
     
     // Helper method for counting color cells
-    private func countNeighborByColor(cell:GOLCell, _ rowOffset:Int, _ colOffset:Int)
-    {
+    private func countNeighborByColor(cell:GOLCell, _ rowOffset:Int, _ colOffset:Int) {
         let neighbor = cellGrid[cell.coordinates.row + rowOffset, cell.coordinates.col + colOffset]
     
         if neighbor.spawnColor == .blue {
@@ -87,8 +83,7 @@ final class GOLGrid {
 
     // Mark: Cell Methods
     // Calculates the next action of a cell
-    func calculateNextAction(cell:GOLCell)
-    {
+    func calculateNextAction(cell:GOLCell) {
         countNeighbors(cell)
         
         if cell.isAlive {
@@ -101,7 +96,6 @@ final class GOLGrid {
                 cell.nextAction = .Die
             }
         } else {
-
             if cell.numberOfNeighbors == 3 {
             
                 if cell.redNeighbors > cell.blueNeighbors {
@@ -109,12 +103,10 @@ final class GOLGrid {
                 } else if cell.redNeighbors < cell.blueNeighbors {
                     cell.spawnColor = .blue
                 }
-                
                 cell.nextAction = .Spawn
             }
         }
     }
-    
     
     // Adjusts the cell's Alive status based on a previously calculated action
     func executeNextAction(cell:GOLCell)
@@ -128,7 +120,6 @@ final class GOLGrid {
             cell.isAlive = false
         }
     }
-    
     
     private func prepNextGeneration()
     {
@@ -147,29 +138,23 @@ final class GOLGrid {
         }
     }
     
-    
-    private func executeNextGeneration()
-    {
+    private func executeNextGeneration() {
         for cell in cellGrid {
             executeNextAction(cell)
         }
     }
     
     
-    func prepareAndExecuteNextGeneration()
-    {
+    func prepareAndExecuteNextGeneration() {
         self.prepNextGeneration()
         self.executeNextGeneration()
         generationCount++
     }
     
-    
-    func killAll()
-    {
+    func killAll() {
         for cell in cellGrid {
             cell.isAlive = false
         }
-            
     }
 }
 

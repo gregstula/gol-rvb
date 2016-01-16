@@ -1,0 +1,3 @@
+[submodule "LiteMatrix"]
+	path = LiteMatrix
+	url = git@github.com:gregstula/LiteMatrix.git

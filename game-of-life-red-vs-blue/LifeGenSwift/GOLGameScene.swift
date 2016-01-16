@@ -25,9 +25,8 @@ class GOLGameScene: SKScene {
     var colorSetting:GOLCell.CellColor = .blue
     
     /* Called when a touch begins */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        for touch in (touches ) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in (touches) {
             let location = touch.locationInNode(self)
             
             let coords = convertPixelsToCoordinates(location)
@@ -102,8 +101,7 @@ class GOLGameScene: SKScene {
 
 
     // MARK: Drawing
-    func renderGrid()
-    {
+    func renderGrid() {
         for cell in grid.cellGrid {
             let coords = cell.coordinates
             if cell.isAlive {
@@ -113,8 +111,7 @@ class GOLGameScene: SKScene {
     }
     
 
-    private func renderGOLCell(coordinates:(Int, Int)) -> SKSpriteNode
-    {
+    private func renderGOLCell(coordinates:(Int, Int)) -> SKSpriteNode {
         let sprite = SKSpriteNode()
         sprite.color = determineGOLCellColor(coordinates)
         sprite.size = CGSizeMake(cellSpriteSize, cellSpriteSize)
@@ -124,8 +121,7 @@ class GOLGameScene: SKScene {
     }
     
     
-    private func determineGOLCellColor(coords:(row:Int, col:Int)) -> UIColor
-    {
+    private func determineGOLCellColor(coords:(row: Int, col: Int)) -> UIColor {
         let cell = grid.cellGrid[coords.row, coords.col]
         var color:UIColor
         
@@ -143,18 +139,17 @@ class GOLGameScene: SKScene {
     
     
     // MARK: Conversions
-    func convertCoordinatesToPixels(coords:(row:Int, col:Int)) -> CGPoint
-    {
+    func convertCoordinatesToPixels(coords:(row: Int, col: Int)) -> CGPoint {
         return CGPointMake(CGFloat(coords.row) * cellSpriteSize,
                             CGFloat(coords.col) * cellSpriteSize)
     }
     
     
-    func convertPixelsToCoordinates(pixel:CGPoint) -> (row:Int, col:Int)
-    {
+    func convertPixelsToCoordinates(pixel:CGPoint) -> (row: Int, col: Int) {
         let row = Int(pixel.x / cellSpriteSize)
         let col = Int(pixel.y / cellSpriteSize)
         return (row, col)
     }
     
 }
+ 
