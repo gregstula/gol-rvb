@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import LiteMatrix
 
 final class GOLCell: NSObject {
 

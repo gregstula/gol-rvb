@@ -4,4 +4,7 @@
    <FileRef
       location = "group:game-of-life-red-vs-blue/rvb.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:game-of-life-red-vs-blue/../lite-matrix/LiteMatrix.xcodeproj">
+   </FileRef>
 </Workspace>

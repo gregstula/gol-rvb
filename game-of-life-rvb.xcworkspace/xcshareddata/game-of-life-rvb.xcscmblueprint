@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "44285F22F345DACB8A07833795E45C0A620B0AAD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "49727314CAC7DC1E412AF4610A6977AD2DE9B1A9" : 0,
+    "44285F22F345DACB8A07833795E45C0A620B0AAD" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1105BC7B-622A-4937-9724-9804E4E537A5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "49727314CAC7DC1E412AF4610A6977AD2DE9B1A9" : "game-of-life-red-vs-blue\/lite-matrix\/",
+    "44285F22F345DACB8A07833795E45C0A620B0AAD" : "game-of-life-red-vs-blue\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "game-of-life-rvb",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "game-of-life-rvb.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:gregstula\/LifeGenSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "44285F22F345DACB8A07833795E45C0A620B0AAD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:gregstula\/lite-matrix.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "49727314CAC7DC1E412AF4610A6977AD2DE9B1A9"
+    }
+  ]
+}

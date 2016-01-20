@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import LitMatrix
 
 class GOLGameScene: SKScene {
 

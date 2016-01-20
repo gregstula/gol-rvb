@@ -3,15 +3,39 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict>
-		<key>LifeGenSwift.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-	</dict>
+	<dict/>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2AA057171C4A1CE2003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AA057271C4A1CE3003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AA057321C4A1CE3003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AA057461C4A1D73003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AA0575D1C4A1D74003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AA057681C4A1D74003C7B24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2AB88F901B9F942700D9A169</key>
 		<dict>
 			<key>primary</key>

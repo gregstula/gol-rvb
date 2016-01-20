@@ -1,0 +1,6 @@
+framework module LiteMatrix {
+  umbrella header "LiteMatrix.h"
+
+  export *
+  module * { export * }
+}
