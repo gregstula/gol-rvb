@@ -40,8 +40,8 @@ func neighbors(pos: Position) -> NeighborsArray {
 
 // Composing
 
-func aliveNeighbors (generation: Generation, cellPosition: Coordinates) -> Int {
-    return neighbors(cellPosition).map { generation($0) } .filter { pos in isAlive(pos) }.count
+func aliveNeighbors (generation: Generation, position: Position) -> Int {
+    return neighbors(position).map { generation($0) } .filter { isAlive($0) }.count
 }
 
 
