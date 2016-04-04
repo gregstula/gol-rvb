@@ -8,17 +8,16 @@ enum CellState {
     case Dead
 }
 
-// TODO: Add initializer
-enum Coordinates {
+enum Position {
     case Position (Int, Int)
     
     init(x:Int, y:Int) {
-        case
+        self = .Position(x,y)
     }
 }
 
-typealias Generation = (Coordinates) -> CellState
-typealias NeighborsArray = [Coordinates]
+typealias Generation = (Position) -> CellState
+typealias NeighborsArray = [Position]
 
 // Leaf functions
 func isAlive(cell: CellState) -> Bool {
@@ -30,11 +29,12 @@ func isAlive(cell: CellState) -> Bool {
     }
 }
 
-func neighbors(pos: Coordinates) -> NeighborsArray {
+func neighbors(pos: Position) -> NeighborsArray {
     switch pos {
     case let .Position(x,y):
-        return [Coordinates((x, y-1)), (x+1, y+1), (x+1, y), (x+1, y-1),
-                (x-1, y), (x-1, y-1), (x, y+1), (x-1, y+1)]
+        return [Position(x: x+1, y: y+1), Position(x: x, y: y-1), Position(x: x+1, y: y),
+                Position(x: x+1, y: y-1), Position(x: x-1, y: y), Position(x: x-1, y: y-1),
+                Position(x: x-1, y: y+1), Position(x: x, y: y+1)]
     }
 }
 
