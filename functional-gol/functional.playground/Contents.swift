@@ -41,7 +41,36 @@ func neighbors(pos: Position) -> NeighborsArray {
 // Composing
 
 func aliveNeighbors (generation: Generation, position: Position) -> Int {
-    return neighbors(position).map { generation($0) } .filter { isAlive($0) }.count
+    return neighbors(position).map { generation($0) } .filter { isAlive($0) } .count
+}
+
+
+func evolution(generation: Generation) -> Generation {
+    return { position in
+        switch aliveNeighbors(generation, position: position) {
+        case 2:
+            if isAlive(generation(position)) {
+                return .Alive
+            } else {
+                return .Dead
+            }
+        case 3:
+            return .Alive
+        default:
+            return .Dead
+        }
+    }
+}
+
+
+// Visualizing
+func visualizeLine(generation: Generation, y: Int) -> String {
+    [1..10].map(visualizeCell(generation, y))
+}
+
+
+func visualizeGeneration(generation: Generation) {
+    
 }
 
 
