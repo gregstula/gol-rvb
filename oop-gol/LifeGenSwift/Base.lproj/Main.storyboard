@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9wd-bZ-xuJ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="eMa-SI-VRY">
+            <objects>
+                <navigationController id="9wd-bZ-xuJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="POL-Bo-05S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LVB-YS-i5n" kind="relationship" relationship="rootViewController" id="7SV-KW-hN0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yC6-PW-Ukq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1941" y="-997"/>
+        </scene>
+        <!--Generation-->
+        <scene sceneID="CtS-rA-C9T">
+            <objects>
+                <viewController id="LVB-YS-i5n" userLabel="Generation" customClass="GameViewController" customModule="LifeGenSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PCf-gQ-wO7"/>
+                        <viewControllerLayoutGuide type="bottom" id="b3d-qh-BLL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bdc-N1-crn" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhW-va-Y8k">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="☢" id="Vtf-Dy-Unc">
+                                        <connections>
+                                            <action selector="clearAll:" destination="LVB-YS-i5n" id="apq-jf-GMt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sek-V4-ldT"/>
+                                    <barButtonItem title="▶︎" id="FCT-i6-DDv">
+                                        <connections>
+                                            <action selector="playButtonPress:" destination="LVB-YS-i5n" id="Poa-NO-51A"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DHr-LB-qnl"/>
+                                    <barButtonItem title="🔵" width="10" id="wos-Y9-KXj">
+                                        <connections>
+                                            <action selector="colorSettingPress:" destination="LVB-YS-i5n" id="TLI-2K-6R4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RhW-va-Y8k" firstAttribute="bottom" secondItem="b3d-qh-BLL" secondAttribute="top" id="3Xl-bI-sA8"/>
+                            <constraint firstItem="RhW-va-Y8k" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" id="L5b-lJ-MGk"/>
+                            <constraint firstAttribute="trailing" secondItem="RhW-va-Y8k" secondAttribute="trailing" id="Qtd-dg-Ypc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Generation" id="rtH-Bz-oAh"/>
+                    <connections>
+                        <outlet property="gameTitle" destination="rtH-Bz-oAh" id="fl0-qT-M69"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1069" y="-987"/>
+        </scene>
+    </scenes>
+</document>
