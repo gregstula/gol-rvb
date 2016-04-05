@@ -1,3 +1,13 @@
+//
+//  Logic.swift
+//  functional-gol
+//
+//  Created by Gregory Stula on 4/5/16.
+//  Copyright © 2016 Gregory Stula. All rights reserved.
+//
+
+import Foundation
+
 // functional.playground
 //
 //  Created by Gregory Stula on 4/4/16.
@@ -92,34 +102,9 @@ func visualizeCell(generation: Generation, x: Int, y: Int) {
 
 func visualizeLine(generation: Generation, y: Int) {
     Array(1...10).map { x in visualizeCell(generation, x: x, y: y) }
-    print("")
 }
 
 func visualizeGeneration(generation: Generation) {
     Array(1...10).map { y in visualizeLine(generation, y: y) }
 }
-
-
-func blinker(position: Position) -> CellState {
-    switch position {
-        case .Position(1,2):
-            return .Alive
-        case .Position(2,2):
-            return .Alive
-        case .Position(3,2):
-            return .Alive
-        default:
-            return .Dead
-    }
-}
-
-visualizeGeneration() { blinker($0) }
-visualizeGeneration() { evolution(blinker)($0) }
-visualizeGeneration() { blinker($0) }
-visualizeGeneration() { evolution(blinker)($0) }
-visualizeGeneration() { blinker($0) }
-visualizeGeneration() { evolution(blinker)($0) }
-
-
-
 

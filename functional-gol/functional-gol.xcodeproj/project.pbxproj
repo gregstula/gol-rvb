@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E44CEFF1CB3EC9800123CF9 /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E44CEFE1CB3EC9800123CF9 /* Logic.swift */; };
 		2E9E982A1CB1442D005C309E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E98291CB1442D005C309E /* AppDelegate.swift */; };
 		2E9E982C1CB1442D005C309E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E9E982B1CB1442D005C309E /* GameScene.sks */; };
 		2E9E982E1CB1442D005C309E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E982D1CB1442D005C309E /* GameScene.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E44CEFE1CB3EC9800123CF9 /* Logic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
 		2E9E98261CB1442D005C309E /* functional-gol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "functional-gol.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9E98291CB1442D005C309E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E9E982B1CB1442D005C309E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E44CEFD1CB3EC7300123CF9 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				2E44CEFE1CB3EC9800123CF9 /* Logic.swift */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
 		2E9E981D1CB1442D005C309E = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		2E9E98281CB1442D005C309E /* functional-gol */ = {
 			isa = PBXGroup;
 			children = (
+				2E44CEFD1CB3EC7300123CF9 /* Logic */,
 				2E9E98291CB1442D005C309E /* AppDelegate.swift */,
 				2E9E982B1CB1442D005C309E /* GameScene.sks */,
 				2E9E982D1CB1442D005C309E /* GameScene.swift */,
@@ -263,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E44CEFF1CB3EC9800123CF9 /* Logic.swift in Sources */,
 				2E9E982E1CB1442D005C309E /* GameScene.swift in Sources */,
 				2E9E98301CB1442D005C309E /* GameViewController.swift in Sources */,
 				2E9E982A1CB1442D005C309E /* AppDelegate.swift in Sources */,
@@ -494,6 +506,7 @@
 				2E9E98541CB1442D005C309E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E9E98551CB1442D005C309E /* Build configuration list for PBXNativeTarget "functional-golTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +515,7 @@
 				2E9E98571CB1442D005C309E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E9E98581CB1442D005C309E /* Build configuration list for PBXNativeTarget "functional-golUITests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +524,7 @@
 				2E9E985A1CB1442D005C309E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
