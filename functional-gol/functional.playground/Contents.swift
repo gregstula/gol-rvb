@@ -64,13 +64,22 @@ func evolution(generation: Generation) -> Generation {
 
 
 // Visualizing
-func visualizeLine(generation: Generation, y: Int) -> String {
-    [1..10].map(visualizeCell(generation, y))
+
+func visualizeCell(generation: Generation, x: Int, y: Int) {
+    switch (generation(Position(x: x, y: y))) {
+    case .Alive:
+        print("#", terminator:"")
+    case .Dead:
+        print(" ", terminator:"")
+    }
 }
 
+func visualizeLine(generation: Generation, y: Int) {
+    Array(1...10).map { x in visualizeCell(generation, x: x, y: y) }
+}
 
 func visualizeGeneration(generation: Generation) {
-    
+    Array(1...10).map { y in visualizeLine(generation, y: y) }
 }
 
 
