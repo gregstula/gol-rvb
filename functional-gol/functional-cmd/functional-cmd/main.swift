@@ -116,29 +116,21 @@ func glider (position: Position) -> CellState {
 }
 
 struct Time {
-    
-    let frozen = false
+    // Used for pausing
+    var frozen = false
     
     var previous: Generation
     
     var current: Generation {
-        set {
-            current = newValue
-        }
-        get {
-            return evolution (previous)
-        }
+        return evolution (previous)
     }
     
-    mutating func next() {
+    mutating func next () {
         previous = current
-        current = evolution (current)
     }
     
-    mutating func loop () {
-        repeat {
-            self.next()
-        } while !frozen
+    mutating func pause () {
+        frozen = !frozen
     }
     
     init (generation: Generation) {
@@ -164,7 +156,6 @@ struct World {
             print("#", terminator:"")
             
         case .Dead:
-            space[x][y] = .Dead
             print(" ", terminator:"")
         }
     }
@@ -189,7 +180,6 @@ struct World {
 
 var world = World() { blinker($0) }
 
-world.time.loop()
+world.time.next()
 world.render()
-
 
