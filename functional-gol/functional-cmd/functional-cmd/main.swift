@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import UIKit
+import AppKit
 
 // The basic types
 enum CellState {
@@ -76,7 +76,7 @@ func evolution (generation: Generation) -> Generation {
             return .Dead
         }
     }
-
+    
 }
 
 
@@ -86,14 +86,14 @@ func evolution (generation: Generation) -> Generation {
 // Represents a generation
 func blinker (position: Position) -> CellState {
     switch position {
-        case .Position(1,2):
-            return .Alive
-        case .Position(2,2):
-            return .Alive
-        case .Position(3,2):
-            return .Alive
-        default:
-            return .Dead
+    case .Position(1,2):
+        return .Alive
+    case .Position(2,2):
+        return .Alive
+    case .Position(3,2):
+        return .Alive
+    default:
+        return .Dead
     }
 }
 
@@ -153,7 +153,7 @@ typealias Space = [Row]
 struct World {
     // Create a 90 by 90 Grid
     var space = Space (count: 90, repeatedValue:
-                  Row (count: 90, repeatedValue: .Dead))
+        Row (count: 90, repeatedValue: .Dead))
     
     var time: Time
     
@@ -162,7 +162,7 @@ struct World {
         case .Alive:
             space[x][y] = .Alive
             print("#", terminator:"")
-
+            
         case .Dead:
             space[x][y] = .Dead
             print(" ", terminator:"")
@@ -184,13 +184,12 @@ struct World {
     init(generation: Generation) {
         time = Time (generation: generation)
     }
-
+    
 }
 
 var world = World() { blinker($0) }
 
-    world.time.loop()
-    world.render()
-
+world.time.loop()
+world.render()
 
 
