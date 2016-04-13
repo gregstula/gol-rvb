@@ -173,7 +173,12 @@ struct World {
     
     mutating func render () {
         Array (space.startIndex ... space.endIndex).map {
-            y in visualizeLine (time.previous, y: y) }
+            y in visualizeLine (time.previous, y: y)
+        }
+    }
+    
+    mutating func killAll () {
+        space = space.map { $0.map { _ in return .Dead } }
     }
     
     init(generation: Generation) {
@@ -185,9 +190,14 @@ struct World {
 var world = World() { blinker(0, position: $0) }
 
 while true {
-let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
-dispatch_sync(dispatch_get_global_queue(qos,0)) {
-world.time.next()
-}
-world.render()
+    for i in 0...4 {
+    let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+   dispatch_async(dispatch_get_global_queue(qos,0)) {
+        world.time.next()
+        // dispatch_async(dispatch_get_main_queue()) {
+        //     world.killAll()
+        // }
+    }
+     world.render()
+    }
 }
