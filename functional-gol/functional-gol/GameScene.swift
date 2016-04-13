@@ -9,6 +9,9 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
+    var world = World() { blinker($0) }
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -29,7 +32,7 @@ class GameScene: SKScene {
             
             sprite.xScale = 0.5
             sprite.yScale = 0.5
-            sprite.position = location
+            sprite.position = jjlocation
             
             let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
             
@@ -38,8 +41,16 @@ class GameScene: SKScene {
             self.addChild(sprite)
         }
     }
+    
+    func renderCellSprite(generation: Generation) {
+        let sprite = SKSpriteNode()
+        sprite.color = determineGoLCellColor(position)
+    }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
 }
+
+

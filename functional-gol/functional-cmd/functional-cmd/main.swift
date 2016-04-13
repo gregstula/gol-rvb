@@ -84,13 +84,15 @@ func evolution (generation: Generation) -> Generation {
 
 
 // Represents a generation
-func blinker (position: Position) -> CellState {
+func blinker (startingPoint: Int, position: Position) -> CellState {
+    let s = startingPoint
+    
     switch position {
-    case .Position(1,2):
+    case .Position(s + 1, s + 2):
         return .Alive
-    case .Position(2,2):
+    case .Position(s + 2, s + 2):
         return .Alive
-    case .Position(3,2):
+    case .Position(s + 3, s + 2):
         return .Alive
     default:
         return .Dead
@@ -98,17 +100,19 @@ func blinker (position: Position) -> CellState {
 }
 
 // Represents a generation aka Position -> CellState
-func glider (position: Position) -> CellState {
+func glider (startingPoint: Int, position: Position) -> CellState {
+    let s = startingPoint
+    
     switch position {
-    case .Position(1,3):
+    case .Position(s - 1,s - 3):
         return .Alive
-    case .Position(2,3):
+    case .Position(s - 2,s - 3):
         return .Alive
-    case .Position(3,3):
+    case .Position(s - 3,s - 3):
         return .Alive
-    case .Position(3,2):
+    case .Position(s - 3,s - 2):
         return .Alive
-    case .Position(2,1):
+    case .Position(s - 2,s - 1):
         return .Alive
     default:
         return .Dead
@@ -178,8 +182,12 @@ struct World {
     
 }
 
-var world = World() { blinker($0) }
+var world = World() { blinker(0, position: $0) }
 
+while true {
+let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+dispatch_sync(dispatch_get_global_queue(qos,0)) {
 world.time.next()
+}
 world.render()
-
+}
