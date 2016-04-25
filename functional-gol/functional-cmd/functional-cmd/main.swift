@@ -84,18 +84,19 @@ func evolution (generation: Generation) -> Generation {
 
 
 // Represents a generation
-func blinker (startingPoint: Int, position: Position) -> CellState {
-    let s = startingPoint
-    
-    switch position {
-    case .Position(s + 1, s + 2):
-        return .Alive
-    case .Position(s + 2, s + 2):
-        return .Alive
-    case .Position(s + 3, s + 2):
-        return .Alive
-    default:
-        return .Dead
+func blinker (startingPoint: Int) -> (Position -> CellState) {
+    return { (position: Position) -> CellState in
+        let s = startingPoint
+        switch position {
+        case .Position(s + 1, s + 2):
+            return .Alive
+        case .Position(s + 2, s + 2):
+            return .Alive
+        case .Position(s + 3, s + 2):
+            return .Alive
+        default:
+            return .Dead
+        }
     }
 }
 
@@ -187,7 +188,7 @@ struct World {
     
 }
 
-var world = World() { blinker(0, position: $0) }
+var world = World() { blinker(0)($0) }
 
 while true {
     for i in 0...4 {
