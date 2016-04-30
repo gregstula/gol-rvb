@@ -72,6 +72,7 @@ class GameViewController: UIViewController {
 
     @IBAction func clearAll(sender: UIBarButtonItem) {
         scene.grid.killAll()
+        self.view.setNeedsDisplay()
     }
     
     
@@ -85,6 +86,22 @@ class GameViewController: UIViewController {
             sender.title = "🔵"
         }
     }
+    
+    
+    
+    var speedCount = 1
+    @IBAction func speedUpButtonPress(sender: UIBarButtonItem) {
+        guard scene.timeBetweenGenerations > 0 else {
+            scene.timeBetweenGenerations = 0.3
+            speedCount = 1
+            sender.title = "x\(speedCount)"
+            return
+        }
+        scene.timeBetweenGenerations -= 0.1
+        speedCount += 1
+        sender.title = "x\(speedCount)"
+    }
+    
     
     override func shouldAutorotate() -> Bool
     {

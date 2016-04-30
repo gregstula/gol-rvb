@@ -63,7 +63,7 @@ class GOLGameScene: SKScene {
     
     // MARK: Timing Properties
     let cellSpriteSize:CGFloat = 20.0
-    let timeBetweenGenerations:Double = 0.3
+    var timeBetweenGenerations:Double = 0.3
     var previousTimeRecorded:CFTimeInterval?
     var timeSinceLastGeneration:Double = 0
     

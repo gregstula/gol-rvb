@@ -29,8 +29,8 @@ class LiteMatrix<T: NSObject> {
         matrix = ObjcLiteMatrix(rowSize:rows, withColumnSize:cols)
         warning = "Index out of range - row capacity: \(rowCapacity), col capacity: \(colCapacity)"
        
-        for var i = 0; i < rowCapacity; i++ {
-            for var j = 0; j < colCapacity; j++ {
+        for i in 0..<rowCapacity {
+            for j in 0..<colCapacity {
                 matrix.addObjectToMatrixAtIndex(T() as AnyObject, row:i , column:j)
             }
         }
@@ -46,8 +46,8 @@ class LiteMatrix<T: NSObject> {
         matrix = ObjcLiteMatrix(rowSize:row, withColumnSize:col)
         warning = "Index out of range - row capacity: \(rowCapacity), col capacity: \(colCapacity)"
         
-        for var i = 0; i < rowCapacity; i++ {
-            for var j = 0; j < colCapacity; j++ {
+        for i in 0..<rowCapacity {
+            for j in 0..<colCapacity {
                 matrix.addObjectToMatrixAtIndex(value as AnyObject, row:i , column:j)
             }
         }
@@ -129,13 +129,17 @@ extension LiteMatrix : CollectionType {
         var colIndex = 0
         
         // Passes function definition for next() on init with a closure
-        return anyGenerator {
+        return AnyGenerator {
             if rowIndex < rowMax {
                 if colIndex < colMax {
-                    return self.getObjectFromMatrixAtRow(rowIndex, column: colIndex++)
+                    let col = colIndex
+                    colIndex += 1
+                    return self.getObjectFromMatrixAtRow(rowIndex, column: col)
                 } else {
                     colIndex = 0
-                    return self.getObjectFromMatrixAtRow(rowIndex++, column: colIndex)
+                    let row = rowIndex
+                    rowIndex += 1
+                    return self.getObjectFromMatrixAtRow(row, column: colIndex)
                 }
             } else {
                 return nil
