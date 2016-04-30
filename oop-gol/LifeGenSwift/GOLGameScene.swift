@@ -11,10 +11,10 @@ import SpriteKit
 class GOLGameScene: SKScene {
 
     weak var connection:GameViewController?
-    
 
     // MARK: Properties
     let grid = GOLGrid(rowSize: 80, columnSize: 80)
+    
     var generation:Int {
         return grid.generationCount
     }
@@ -25,8 +25,7 @@ class GOLGameScene: SKScene {
     var colorSetting:GOLCell.CellColor = .blue
     
     /* Called when a touch begins */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
@@ -40,11 +39,9 @@ class GOLGameScene: SKScene {
             }
         }
     }
-    
     
     /* Called when a touch is dragged */
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
@@ -59,7 +56,6 @@ class GOLGameScene: SKScene {
             
         }
     }
-    
     
     // MARK: Timing Properties
     let cellSpriteSize:CGFloat = 20.0
@@ -100,10 +96,8 @@ class GOLGameScene: SKScene {
         }
     }
 
-
     // MARK: Drawing
-    func renderGrid()
-    {
+    func renderGrid() {
         for cell in grid.cellGrid {
             let coords = cell.coordinates
             if cell.isAlive {
@@ -111,10 +105,8 @@ class GOLGameScene: SKScene {
             }
         }
     }
-    
 
-    private func renderGOLCell(coordinates:(Int, Int)) -> SKSpriteNode
-    {
+    private func renderGOLCell(coordinates:(Int, Int)) -> SKSpriteNode {
         let sprite = SKSpriteNode()
         sprite.color = determineGOLCellColor(coordinates)
         sprite.size = CGSizeMake(cellSpriteSize, cellSpriteSize)
@@ -123,9 +115,7 @@ class GOLGameScene: SKScene {
         return sprite
     }
     
-    
-    private func determineGOLCellColor(coords:(row:Int, col:Int)) -> UIColor
-    {
+    private func determineGOLCellColor(coords:(row:Int, col:Int)) -> UIColor {
         let cell = grid.cellGrid[coords.row, coords.col]
         var color:UIColor
         
@@ -141,17 +131,13 @@ class GOLGameScene: SKScene {
         return color
     }
     
-    
     // MARK: Conversions
-    func convertCoordinatesToPixels(coords:(row:Int, col:Int)) -> CGPoint
-    {
+    func convertCoordinatesToPixels(coords:(row:Int, col:Int)) -> CGPoint {
         return CGPointMake(CGFloat(coords.row) * cellSpriteSize,
                             CGFloat(coords.col) * cellSpriteSize)
     }
     
-    
-    func convertPixelsToCoordinates(pixel:CGPoint) -> (row:Int, col:Int)
-    {
+    func convertPixelsToCoordinates(pixel:CGPoint) -> (row:Int, col:Int) {
         let row = Int(pixel.x / cellSpriteSize)
         let col = Int(pixel.y / cellSpriteSize)
         return (row, col)
