@@ -63,6 +63,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Generation" id="rtH-Bz-oAh">
+                        <barButtonItem key="leftBarButtonItem" title=" ✎ Blinker" id="Ojf-pZ-cs4"/>
                         <barButtonItem key="rightBarButtonItem" title="x1" id="1Hq-QP-jTG">
                             <connections>
                                 <action selector="speedUpButtonPress:" destination="LVB-YS-i5n" id="Srl-Qj-rAN"/>
