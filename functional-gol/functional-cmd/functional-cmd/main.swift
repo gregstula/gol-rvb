@@ -57,7 +57,7 @@ func neighbors (pos: Position) -> NeighborsArray {
 // Composing
 
 func aliveNeighbors (generation: Generation, position: Position) -> Int {
-    return neighbors (position).map { generation($0) } .filter { isAlive($0) } .count
+    return neighbors (position).lazy.map { generation($0) }.lazy.filter { isAlive($0) }.lazy.count
 }
 
 
@@ -120,22 +120,15 @@ func glider (startingPoint: Int, position: Position) -> CellState {
     }
 }
 
-struct Time {
-    // Used for pausing
-    var frozen = false
-    
+class Time {
     var previous: Generation
     
     var current: Generation {
         return evolution (previous)
     }
     
-    mutating func next () {
+    func next() {
         previous = current
-    }
-    
-    mutating func pause () {
-        frozen = !frozen
     }
     
     init (generation: Generation) {
@@ -147,14 +140,14 @@ struct Time {
 typealias Row = [CellState]
 typealias Space = [Row]
 
-struct World {
+class World {
     // Create a 90 by 90 Grid
     var space = Space (count: 90, repeatedValue:
         Row (count: 90, repeatedValue: .Dead))
     
     var time: Time
     
-    private mutating func visualizeCell (generation: Generation, x: Int, y: Int) {
+    private func visualizeCell (generation: Generation, x: Int, y: Int) {
         switch (generation (Position (x: x, y: y))) {
         case .Alive:
             space[x][y] = .Alive
@@ -165,21 +158,17 @@ struct World {
         }
     }
     
-    private mutating func visualizeLine (generation: Generation, y: Int) {
-        Array (space.startIndex ... space.endIndex).map {
-            x in visualizeCell (generation, x: x, y: y)
+    private func visualizeLine (generation: Generation, y: Int) {
+        for x in space.startIndex ... space.endIndex {
+            self.visualizeCell (generation, x: x, y: y)
         }
         print(" ")
     }
     
-    mutating func render () {
-        Array (space.startIndex ... space.endIndex).map {
-            y in visualizeLine (time.previous, y: y)
+    func render () {
+        for y in space.startIndex ... space.endIndex {
+            visualizeLine (time.previous, y: y)
         }
-    }
-    
-    mutating func killAll () {
-        space = space.map { $0.map { _ in return .Dead } }
     }
     
     init(generation: Generation) {
@@ -191,14 +180,6 @@ struct World {
 var world = World() { blinker(0)($0) }
 
 while true {
-    for i in 0...4 {
-    let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
-   dispatch_async(dispatch_get_global_queue(qos,0)) {
-        world.time.next()
-        // dispatch_async(dispatch_get_main_queue()) {
-        //     world.killAll()
-        // }
-    }
-     world.render()
-    }
+    world.time.next()
+    world.render()
 }
