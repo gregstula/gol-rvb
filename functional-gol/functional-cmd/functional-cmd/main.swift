@@ -63,13 +63,10 @@ func aliveNeighbors (generation: Generation, position: Position) -> Int {
 
 func evolution (generation: Generation) -> Generation {
     return { position in
-        switch aliveNeighbors(generation, position: position) {
+        let result = aliveNeighbors(generation, position: position)
+        switch result {
         case 2:
-            if isAlive(generation(position)) {
-                return .Alive
-            } else {
-                return .Dead
-            }
+            return generation(position)
         case 3:
             return .Alive
         default:
